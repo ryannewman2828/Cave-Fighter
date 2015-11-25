@@ -1,0 +1,11 @@
+--------------------Roadmap--------------------
+
+- Optimize randomizer algorithm
+- Add better pathing for the enemies
+- Add more enemies
+- Add AI for Blue Slime
+- Add AI for ArchMage Boss
+- Add projectiles for Bosses
+- Add music
+- Fix Menus to be more stylish
+- Add powerup sound and text on pickup

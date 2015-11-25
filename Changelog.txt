@@ -1,0 +1,12 @@
+--------------------Changelog--------------------
+
+Version: 1.0
+
+- Released game with
+	- Random Map Generator
+	- Difficulty settings
+	- Size settings
+	- Random enemies
+	- 3 Bosses
+	- 4 Types of enemies
+	- Powerups
