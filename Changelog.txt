@@ -10,3 +10,7 @@ Version: 1.0
 	- 3 Bosses
 	- 4 Types of enemies
 	- Powerups
+
+Version 1.1
+
+- Fixed the Map generation algorithm to be more effiecient

@@ -1,10 +1,10 @@
 /**
  * Ryan Newman
- * ICS4U - 1
  * Cave Fighter
- * June 10 2015 
+ * Version 1.1
+ * November 26 2015 
  * 
- * WARNING: May take long to load the map
+ * WARNING: May take long to load the maps
  */
 package game;
 
@@ -116,9 +116,6 @@ public class GamePanel extends Applet implements Runnable, KeyListener,
 		for (int i = 0; i < 3; i++) {
 			menuButtons.add(new Rectangle(0, 0, 0, 0));
 		}
-
-		// Prints the map layout to the console
-		// map.print();
 
 		// Image wall Setup
 		imgWalls = getImage(base, "data/walls.png");

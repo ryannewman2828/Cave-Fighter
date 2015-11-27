@@ -1,3 +1,9 @@
+/**
+ * Ryan Newman
+ * Cave Fighter
+ * Version 1.1
+ * November 26 2015 
+*/
 package game;
 
 import game.GamePanel.gameStates;

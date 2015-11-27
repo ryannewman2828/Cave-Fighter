@@ -1,8 +1,8 @@
 /**
  * Ryan Newman
- * ICS4U - 1
  * Cave Fighter
- * June 10 2015 
+ * Version 1.1
+ * November 26 2015  
  */
 package game;
 

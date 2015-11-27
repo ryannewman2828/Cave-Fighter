@@ -1,6 +1,5 @@
 --------------------Roadmap--------------------
 
-- Optimize randomizer algorithm
 - Add better pathing for the enemies
 - Add more enemies
 - Add AI for Blue Slime

@@ -1,9 +1,9 @@
 /**
  * Ryan Newman
- * ICS4U - 1
  * Cave Fighter
- * June 10 2015 
-*/
+ * Version 1.1
+ * November 26 2015 
+ */
 package game;
 
 import game.GamePanel.gameStates;
@@ -14,29 +14,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Map {
-	
-	//rooms list
+
+	// rooms list
 	private ArrayList<Room> rooms = new ArrayList<>();
-	
-	//Current room
+
+	// Current room
 	private Room activeRoom;
-	
-	//For creation of the map
+
+	// For creation of the map
 	private final int GRID_SIZE;
 	private int roomsLeft;
 	private boolean[][] layout;
 	private boolean bossRoomSpawned;
 	private ArrayList<Integer> indexes = new ArrayList<>();
-	
+
 	// A random x and y co-ordinate
 	int randX, randY;
-	
-	//Main character 
+
+	// Main character
 	private MainCharacter character;
 
 	// The current move state
 	public static moveStates move = moveStates.STATIC;
-	
+
 	// The bounds of a single room in the map
 	public Rectangle boundTop1 = new Rectangle(0, 0, 360, 90);
 	public Rectangle boundTop2 = new Rectangle(450, 0, 360, 90);
@@ -49,19 +49,19 @@ public class Map {
 
 	public Map(int difficulty, int size) {
 
-		//sets main character
+		// sets main character
 		character = new MainCharacter();
 
 		switch (size) {
 		case 1:
 			// Sets the size of the boolean grid to 5
-			GRID_SIZE = 5;
+			GRID_SIZE = 7;
 			// there will be either 9, 10 or 11 rooms
 			roomsLeft = (int) (Math.random() * 3) + 9;
 			break;
 		case 2:
 			// Sets the size of the boolean grid to 7
-			GRID_SIZE = 7;
+			GRID_SIZE = 9;
 			// there will be either 19, 20 or 21 rooms
 			roomsLeft = (int) (Math.random() * 3) + 19;
 			break;
@@ -112,11 +112,11 @@ public class Map {
 	}
 
 	public void update() {
-		
-		//Updates the active room
+
+		// Updates the active room
 		activeRoom.update();
-		
-		//Handles character movement
+
+		// Handles character movement
 		switch (move) {
 		case DOWN:
 			character.setAnimationIndexBody(0);
@@ -182,12 +182,12 @@ public class Map {
 			character.getProjectiles().clear();
 			activeRoom.redrawRoom();
 		}
-		
-		//Updates the main character
+
+		// Updates the main character
 		character.update();
 	}
-	
-	//Connects the rooms
+
+	// Connects the rooms
 	private void connectRooms() {
 		for (int i = 0; i < GRID_SIZE; i++) {
 			for (int j = 0; j < GRID_SIZE; j++) {
@@ -219,53 +219,110 @@ public class Map {
 				}
 			}
 		}
+		print();
 	}
 
-	
-	//Randomizes the room placement
-	private void randomize() {
+	// Randomizes the room placement
+		private void randomize() {
 
-		// Sets 5 rooms up in the middle
-		layout[GRID_SIZE / 2][GRID_SIZE / 2] = true;
-		indexes.add((GRID_SIZE / 2) * GRID_SIZE + GRID_SIZE / 2);
-		layout[(GRID_SIZE / 2) + 1][GRID_SIZE / 2] = true;
-		indexes.add(((GRID_SIZE / 2) + 1) * GRID_SIZE + GRID_SIZE / 2);
-		layout[GRID_SIZE / 2][(GRID_SIZE / 2) - 1] = true;
-		indexes.add((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE / 2) - 1);
-		layout[GRID_SIZE / 2][(GRID_SIZE / 2) + 1] = true;
-		indexes.add((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE / 2) + 1);
-		layout[(GRID_SIZE / 2) - 1][GRID_SIZE / 2] = true;
-		indexes.add(((GRID_SIZE / 2) - 1) * GRID_SIZE + GRID_SIZE / 2);
-		roomsLeft -= 5;
+			// the possible co-ordinates for rooms
+			ArrayList<Integer> openIndexes = new ArrayList<Integer>();
 
-		// randomizes room placement
-		while (roomsLeft > 0) {
-			randX = (int) (Math.random() * GRID_SIZE);
-			randY = (int) (Math.random() * GRID_SIZE);
-			if (!layout[randY][randX]) {
-				if (randX > 0 && layout[randY][randX - 1]) {
-					layout[randY][randX] = true;
-					roomsLeft--;
-					indexes.add(randY * GRID_SIZE + randX);
-				} else if (randX < GRID_SIZE - 1 && layout[randY][randX + 1]) {
-					layout[randY][randX] = true;
-					roomsLeft--;
-					indexes.add(randY * GRID_SIZE + randX);
-				} else if (randY < GRID_SIZE - 1 && layout[randY + 1][randX]) {
-					layout[randY][randX] = true;
-					roomsLeft--;
-					indexes.add(randY * GRID_SIZE + randX);
-				} else if (randY > 0 && layout[randY - 1][randX]) {
-					layout[randY][randX] = true;
-					roomsLeft--;
-					indexes.add(randY * GRID_SIZE + randX);
+			// A random index
+			int randIndex;
+
+			// Sets 5 rooms up in the middle
+			layout[GRID_SIZE / 2][GRID_SIZE / 2] = true;
+			indexes.add((GRID_SIZE / 2) * GRID_SIZE + GRID_SIZE / 2);
+
+			layout[(GRID_SIZE / 2) + 1][GRID_SIZE / 2] = true;
+			indexes.add(((GRID_SIZE / 2) + 1) * GRID_SIZE + GRID_SIZE / 2);
+			openIndexes.add((((GRID_SIZE / 2) + 2) * GRID_SIZE + GRID_SIZE / 2));
+			openIndexes
+					.add((((GRID_SIZE / 2) + 1) * GRID_SIZE + (GRID_SIZE / 2 + 1)));
+			openIndexes
+					.add((((GRID_SIZE / 2) + 1) * GRID_SIZE + (GRID_SIZE / 2 - 1)));
+
+			layout[GRID_SIZE / 2][(GRID_SIZE / 2) - 1] = true;
+			indexes.add((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE / 2) - 1);
+			openIndexes.add(((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE / 2) - 2));
+
+			layout[GRID_SIZE / 2][(GRID_SIZE / 2) + 1] = true;
+			indexes.add((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE / 2) + 1);
+			openIndexes.add(((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE / 2) + 2));
+
+			layout[(GRID_SIZE / 2) - 1][GRID_SIZE / 2] = true;
+			indexes.add(((GRID_SIZE / 2) - 1) * GRID_SIZE + GRID_SIZE / 2);
+			openIndexes.add((((GRID_SIZE / 2) - 2) * GRID_SIZE + GRID_SIZE / 2));
+			openIndexes
+					.add((((GRID_SIZE / 2) - 1) * GRID_SIZE + (GRID_SIZE / 2 + 1)));
+			openIndexes
+					.add((((GRID_SIZE / 2) - 1) * GRID_SIZE + (GRID_SIZE / 2 - 1)));
+
+			roomsLeft -= 5;
+
+			// randomizes room placement
+			while (roomsLeft > 0) {
+
+				randIndex = (int) (Math.random() * openIndexes.size());
+				indexes.add(openIndexes.get(randIndex));
+
+				int y = openIndexes.get(randIndex) / GRID_SIZE;
+				int x = openIndexes.get(randIndex) % GRID_SIZE;
+
+				layout[y][x] = true;
+
+				if (y > 0 && !openIndexes.contains(y * GRID_SIZE + x - 1)) {
+					openIndexes.add(y * GRID_SIZE + x - 1);
 				}
+				if (y < GRID_SIZE - 1
+						&& !openIndexes.contains(y * GRID_SIZE + x + 1)) {
+					openIndexes.add(y * GRID_SIZE + x + 1);
+				}
+				if (x > 0 && !openIndexes.contains((y - 1) * GRID_SIZE + x)) {
+					openIndexes.add((y - 1) * GRID_SIZE + x);
+				}
+				if (x < GRID_SIZE - 1
+						&& !openIndexes.contains((y + 1) * GRID_SIZE + x)) {
+					openIndexes.add((y + 1) * GRID_SIZE + x);
+				}
+				openIndexes.remove(randIndex);
+				roomsLeft--;
 			}
+
+			// Sorts the indexes array to match grid indexes with room indexes
+			Collections.sort(indexes);
 		}
 
-		// Sorts the indexes array to match grid indexes with room indexes
-		Collections.sort(indexes);
-	}
+	/**
+	 * //Randomizes the room placement private void randomize() {
+	 * 
+	 * // Sets 5 rooms up in the middle layout[GRID_SIZE / 2][GRID_SIZE / 2] =
+	 * true; indexes.add((GRID_SIZE / 2) * GRID_SIZE + GRID_SIZE / 2);
+	 * layout[(GRID_SIZE / 2) + 1][GRID_SIZE / 2] = true;
+	 * indexes.add(((GRID_SIZE / 2) + 1) * GRID_SIZE + GRID_SIZE / 2);
+	 * layout[GRID_SIZE / 2][(GRID_SIZE / 2) - 1] = true; indexes.add((GRID_SIZE
+	 * / 2) * GRID_SIZE + (GRID_SIZE / 2) - 1); layout[GRID_SIZE / 2][(GRID_SIZE
+	 * / 2) + 1] = true; indexes.add((GRID_SIZE / 2) * GRID_SIZE + (GRID_SIZE /
+	 * 2) + 1); layout[(GRID_SIZE / 2) - 1][GRID_SIZE / 2] = true;
+	 * indexes.add(((GRID_SIZE / 2) - 1) * GRID_SIZE + GRID_SIZE / 2); roomsLeft
+	 * -= 5;
+	 * 
+	 * // randomizes room placement while (roomsLeft > 0) { randX = (int)
+	 * (Math.random() * GRID_SIZE); randY = (int) (Math.random() * GRID_SIZE);
+	 * if (!layout[randY][randX]) { if (randX > 0 && layout[randY][randX - 1]) {
+	 * layout[randY][randX] = true; roomsLeft--; indexes.add(randY * GRID_SIZE +
+	 * randX); } else if (randX < GRID_SIZE - 1 && layout[randY][randX + 1]) {
+	 * layout[randY][randX] = true; roomsLeft--; indexes.add(randY * GRID_SIZE +
+	 * randX); } else if (randY < GRID_SIZE - 1 && layout[randY + 1][randX]) {
+	 * layout[randY][randX] = true; roomsLeft--; indexes.add(randY * GRID_SIZE +
+	 * randX); } else if (randY > 0 && layout[randY - 1][randX]) {
+	 * layout[randY][randX] = true; roomsLeft--; indexes.add(randY * GRID_SIZE +
+	 * randX); } } }
+	 * 
+	 * // Sorts the indexes array to match grid indexes with room indexes
+	 * Collections.sort(indexes); }
+	 */
 
 	public void moveLeftRoom() {
 		activeRoom = activeRoom.getLeftRoom();
@@ -300,18 +357,19 @@ public class Map {
 	}
 
 	/**
-	 * @param character the character to set
+	 * @param character
+	 *            the character to set
 	 */
 	public void setCharacter(MainCharacter character) {
 		this.character = character;
 	}
 
-	//Prints map to console
+	// Prints map to console
 	public void print() {
 		for (int i = 0; i < layout.length; i++) {
 			for (int j = 0; j < layout.length; j++) {
 				if (layout[i][j]) {
-					System.out.print(" ");
+					System.out.print("0");
 				} else {
 					System.out.print("X");
 				}
