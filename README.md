@@ -1,2 +1,2 @@
 # Cave-Fighter
-A java based game in the style of Team Meat's "The Binding of Isaac"
+A java based game in the style of Edmund McMillen's and Florian Himsl's "The Binding of Isaac"
