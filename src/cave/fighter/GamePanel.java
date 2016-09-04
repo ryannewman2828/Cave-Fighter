@@ -1,28 +1,20 @@
 package cave.fighter;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel implements MouseMotionListener,
-		KeyListener {
+import cave.fighter.utilities.Constants;
 
-	GamePanel() throws IOException {
+public class GamePanel extends CaveFighterPanel implements KeyListener {
+
+	public GamePanel() throws IOException {
 		
-		// Adds mouse listeners
-		addMouseMotionListener(this);
+		switchPanel = false;
+		
 		addKeyListener(this);
 	}
 
@@ -31,27 +23,13 @@ public class GamePanel extends JPanel implements MouseMotionListener,
 
 	}
 
-	// The main run loop
-	public void run() throws InterruptedException, IOException {
-
-		// Infinite loop
-		while (true) {
-
-			// redraw everything in the GamePanel
-			repaint();
-
-			// pause every 17 milliseconds
-			// (runs program at 60 frames per second)
-			Thread.sleep(17);
-
-		}
-	}
-
 	@Override
-	public void mouseDragged(MouseEvent e) {
-	}
+	public void run() {
 
-	public void mouseMoved(MouseEvent e) {
+		// redraw everything in the GamePanel
+		repaint();
+
+		System.out.println("game panel");
 	}
 
 	@Override
@@ -63,6 +41,6 @@ public class GamePanel extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {		
+	public void keyTyped(KeyEvent e) {
 	}
 }

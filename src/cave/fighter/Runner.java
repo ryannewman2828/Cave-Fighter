@@ -8,10 +8,10 @@ import javax.swing.WindowConstants;
 import cave.fighter.utilities.Constants;
 
 public class Runner {
-	
+
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-		// Create and setup the JFrame
+		
 		JFrame myFrame = new JFrame();
 		myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		myFrame.setVisible(true);
@@ -20,7 +20,11 @@ public class Runner {
 		myFrame.setTitle("Cave Fighter");
 		myFrame.setLocationRelativeTo(null);
 
-		// Create and insert our GamePanel into the JFrame
+		MenuPanel menuPanel = new MenuPanel();
+		menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
+		menuPanel.setVisible(true);
+		myFrame.setContentPane(menuPanel);
+
 		GamePanel myPanel = new GamePanel();
 		myPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
 		myPanel.setVisible(true);
