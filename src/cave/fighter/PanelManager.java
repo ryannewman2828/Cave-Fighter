@@ -2,6 +2,8 @@ package cave.fighter;
 
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 import cave.fighter.utilities.Constants;
 
 public class PanelManager {
@@ -9,8 +11,11 @@ public class PanelManager {
 	private CaveFighterPanel curPanel;
 	private final CaveFighterPanel menuPanel;
 	private final CaveFighterPanel gamePanel;
+	private final JFrame jFrame;
 	
-	public PanelManager() throws IOException {
+	public PanelManager(JFrame jFrame) throws IOException {
+		this.jFrame = jFrame;
+		
 		menuPanel = new MenuPanel();
 		menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
 		menuPanel.setVisible(true);
@@ -20,13 +25,27 @@ public class PanelManager {
 		gamePanel.setVisible(true);
 		
 		curPanel = menuPanel;
+		jFrame.setContentPane(curPanel);
 	}	
+	
+	// TODO make this more extendable later
+	public void switchPanel(){
+		if(curPanel == menuPanel){
+			curPanel = gamePanel;
+		} else {
+			curPanel = menuPanel;
+		}
+	}
 	
 	public void run() throws InterruptedException{
 	
 		while (true) {
 
 			curPanel.run();
+			
+			if(curPanel.isSwitchPanel()){
+				switchPanel();
+			}
 			
 			// pause every 17 milliseconds
 			// (runs program at 60 frames per second)

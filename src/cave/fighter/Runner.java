@@ -20,18 +20,9 @@ public class Runner {
 		myFrame.setTitle("Cave Fighter");
 		myFrame.setLocationRelativeTo(null);
 
-		MenuPanel menuPanel = new MenuPanel();
-		menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
-		menuPanel.setVisible(true);
-		myFrame.setContentPane(menuPanel);
-
-		GamePanel myPanel = new GamePanel();
-		myPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
-		myPanel.setVisible(true);
-		myFrame.setContentPane(myPanel);
-
-		// calls on the run method
-		myPanel.run();
+		PanelManager pm = new PanelManager(myFrame);
+		
+		pm.run();
 	}
 
 }

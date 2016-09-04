@@ -13,7 +13,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	public GamePanel() throws IOException {
 		
-		switchPanel = false;
+		setSwitchPanel(false);
 		
 		addKeyListener(this);
 	}

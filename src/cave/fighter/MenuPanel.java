@@ -13,9 +13,11 @@ import cave.fighter.utilities.Constants;
 public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 		MouseListener {
 
+	boolean click = false;
+	
 	public MenuPanel() throws IOException {
 		
-		switchPanel = false;
+		setSwitchPanel(false);
 		
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -32,6 +34,10 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 		// redraw everything in the GamePanel
 		repaint();
 
+		if(click){
+			setSwitchPanel(true);
+		}
+		
 		System.out.println("menu panel");
 	}
 
@@ -57,6 +63,7 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+		click = true;
 	}
 
 	@Override
