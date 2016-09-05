@@ -1,9 +1,6 @@
 package cave.fighter.character;
 
-import game.GamePanel;
 import game.Projectile;
-import game.GamePanel.attackStates;
-import game.GamePanel.gameStates;
 
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -16,69 +13,67 @@ import animation.framework.Animation;
 
 public class MainCharacter {
 
-	//Uses the singleton pattern
+	// Uses the singleton design pattern
 	private static MainCharacter instance = new MainCharacter();
-	
-	// health the character has when health is full
-	private int health = 6;
 
-	// the current health
-	private int curHealth = health;
+	private int health;
+	private int curHealth;
+	private int speed;
+	private int fireRate;
+	private int bulletSpeed;
+	private int x;
+	private int y;
+	private int fireCounter;
+	private int damageCounter;
+	private int headCounter;
+	private int damage;
+	private int animationIndexHead;
+	private int animationIndexBody;
+	private boolean fireReady;
+	private boolean alive;
 
-	// pixels / 60th of a second
-	private int speed = 3;
+	private ArrayList<Projectile> projectiles;
 
-	// The current rate the character can shot at
-	private int fireRate = 25;
-
-	// The speed of the fired bullet
-	private int bulletSpeed = 4;
-
-	// holds the co-ordinates of the characters
-	// initialized to middle of map
-	private int x = 400;
-	private int y = 240;
-
-	// the current time since the last projectile was fired
-	private int fireCounter = 0;
-
-	//When can I take damage again?
-	private int damageCounter = 0;
-
-	//Am i ready to fire a bullet?
-	private boolean fireReady = false;
-
-	// controls how long the head will stay looking in the attack direction
-	private int headCounter = 0;
-
-	// the damage of the character
-	private int damage = 1;
-
-	//The index for what head/body to draw
-	private int animationIndexHead = 0;
-	private int animationIndexBody = 0;
-
-	//Holds the projectiles
-	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-
-	// The current attack state
-	public static attackStates attack = attackStates.STATIC;
-
-	// HitBoxes
-	public static Rectangle rect = new Rectangle(0, 0, 0, 0);
-	public static Rectangle rect2 = new Rectangle(0, 0, 0, 0);
-
-	private MainCharacter() {
-		
+	private enum attackStates {
+		UP, DOWN, LEFT, RIGHT, STATIC
 	}
 
+	private attackStates attack;
+
+	private static Rectangle rect;
+	private static Rectangle rect2;
+
+	private MainCharacter() {
+		health = Constants.CHAR_START_HEALTH;
+		curHealth = Constants.CHAR_START_HEALTH;
+		speed = Constants.CHAR_START_SPEED;
+		fireRate = Constants.CHAR_START_FIRE_RATE;
+		bulletSpeed = Constants.CHAR_START_BULLET_SPEED;
+		x = Constants.CHAR_START_X;
+		y = Constants.CHAR_START_Y;
+		fireCounter = 0;
+		damageCounter = 0;
+		headCounter = 0;
+		damage = Constants.CHAR_START_DAMAGE;
+		animationIndexHead = 0;
+		animationIndexBody = 0;
+		fireReady = false;
+		alive = true;
+
+		projectiles = new ArrayList<Projectile>();
+		attack = attackStates.STATIC;
+		rect = new Rectangle(0, 0, 0, 0);
+		rect2 = new Rectangle(0, 0, 0, 0);
+	}
+
+	public MainCharacter getCharacterInstance(){
+		return instance;
+	}
+	
 	public void update() {
+		rect.setRect(x - Constants.CHAR_HITBOX_1_X_DISPLACE, y - Constants.CHAR_HITBOX_1_Y_DISPLACE, Constants.CHAR_HITBOX_1_WIDTH, Constants.CHAR_HITBOX_1_HEIGHT);
+		rect2.setRect(x - Constants.CHAR_HITBOX_2_X_DISPLACE, y - Constants.CHAR_HITBOX_2_Y_DISPLACE, Constants.CHAR_HITBOX_2_WIDTH, Constants.CHAR_HITBOX_2_HEIGHT);
 
-		// Updates position of the hitBoxes
-		rect.setRect(x - 15, y - 9, 29, 18);
-		rect2.setRect(x - 12, y - 23, 24, 22);
-
-		// Handles the delay between shots from the character
 		if (!fireReady) {
 			fireCounter++;
 			if (fireCounter == fireRate) {
@@ -87,21 +82,16 @@ public class MainCharacter {
 			}
 		}
 
-		// Decrements the counter for the head
 		if (headCounter > 0) {
 			headCounter--;
 		} else {
-			
-			// if counter == 0 then no attack state
 			attack = attackStates.STATIC;
 		}
-
-		//Decrements damage counter
+		
 		if (damageCounter > 0) {
 			damageCounter--;
 		}
 
-		//Fires depending on attack state and if fire ready
 		switch (attack) {
 		case DOWN:
 			animationIndexHead = 0;
@@ -128,9 +118,7 @@ public class MainCharacter {
 		default:
 			break;
 		}
-		
-		
-		//Updates/removes projectiles
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			if (projectiles.get(i).isActive()) {
 				projectiles.get(i).update();
@@ -140,17 +128,15 @@ public class MainCharacter {
 		}
 	}
 
-	// method for shooting the bullets
 	private void shoot(int speedX, int speedY) {
-		Projectile p = new Projectile(x, y - 12, speedX, speedY);
+		Projectile p = new Projectile(x, y - Constants.CHAR_BULLET_Y_DISPLACE, speedX, speedY);
 		projectiles.add(p);
 		fireReady = false;
 	}
 
-	//Character gets damaged
 	public void getHurt(int damage) {
 		if (damageCounter == 0) {
-			damageCounter = 120;
+			damageCounter = Constants.CHAR_BULLET_COOLDOWN;
 			hurt(damage);
 		}
 	}
@@ -195,7 +181,6 @@ public class MainCharacter {
 		this.y = y;
 	}
 
-	//Character moves
 	public void move(int xSpeed, int ySpeed) {
 		x += xSpeed;
 		y += ySpeed;
@@ -234,7 +219,6 @@ public class MainCharacter {
 	}
 
 	public void heal() {
-		// Heals the player for 1 heart or 2 half hearts
 		if (curHealth + 2 <= health) {
 			curHealth += 2;
 		} else {
@@ -247,7 +231,7 @@ public class MainCharacter {
 			curHealth -= damage;
 		} else {
 			curHealth = 0;
-			GamePanel.setGameState(gameStates.DEAD);
+			alive = false;
 		}
 	}
 
