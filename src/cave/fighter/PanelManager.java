@@ -35,6 +35,7 @@ public class PanelManager {
 		} else {
 			curPanel = menuPanel;
 		}
+		jFrame.setContentPane(curPanel);
 	}
 	
 	public void run() throws InterruptedException{

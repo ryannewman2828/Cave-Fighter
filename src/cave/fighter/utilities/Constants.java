@@ -5,8 +5,8 @@ public final class Constants {
 	public static final int PANEL_HEIGHT = 505;
 	public static final int PANEL_WIDTH = 805;
 	
-	public static final int POINT_1_X = 5;
-	public static final int POINT_2_X = 725;
+	public static final int POINTER_1_X = 5;
+	public static final int POINTER_2_X = 725;
 	public static final int POINTER_X_DISPLACE = 40;
 	public static final int POINTER_BETWEEN_DISPLACE = 120;
 	
@@ -30,6 +30,11 @@ public final class Constants {
 	public static final int BOTTOM_BUTTON_X_2 = 558;
 	
 	public static final int MOUSE_COOLDOWN = 15;
+	
+	public static final int CHAR_MAX_HEALTH = 10;
+	public static final int CHAR_MAX_SPEED = 6;
+	public static final int CHAR_MAX_FIRE_RATE = 10;
+	public static final int CHAR_MAX_DAMAGE = 5;
 	
 	private Constants() 
 	{/* Utility Class */}

@@ -1,8 +1,5 @@
 package cave.fighter;
 
-import game.Map;
-import game.GamePanel.gameStates;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -63,9 +60,9 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 			g2d.drawImage(Assets.selection, 0, 0, this);
 
 			if (pointerOneY != 0)
-				g2d.drawImage(Assets.pointer1, Constants.POINT_1_X, pointerOneY, this);
+				g2d.drawImage(Assets.pointer1, Constants.POINTER_1_X, pointerOneY, this);
 			if (pointerTwoY != 0)
-				g2d.drawImage(Assets.pointer2, Constants.POINT_2_X, pointerTwoY, this);
+				g2d.drawImage(Assets.pointer2, Constants.POINTER_2_X, pointerTwoY, this);
 			break;
 		default:
 			break;
@@ -87,10 +84,8 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 
 		switch (menuState) {
 		case HTP:
-			// Updates the mouse
 			mouse.setRect(mouseX, mouseY, 1, 1);
 
-			// Moves back into the menu
 			if (mouseClicked && mouseCounter == 0) {
 				if (mouse.intersects(menuButtons.get(0))) {
 					menuState = MenuStates.MENU;
@@ -112,11 +107,12 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 
 			if (mouseClicked && mouseCounter == 0) {
 				if (mouse.intersects(menuButtons.get(0))) {
-
 					menuState = MenuStates.SELECTION;
+					
 					for (int i = 0; i < 5; i++) {
 						menuButtons.add(new Rectangle(0, 0, 0, 0));
 					}
+					
 					for (int i = 0; i < 3; i++) {
 						for (int j = 0; j < 2; j++) {
 							menuButtons.get(i * 2 + j).setRect(Constants.SELECTION_BUTTON_LEFT_DISPLACE + Constants.SELECTION_BUTTON_X_DISPLACE * j,
@@ -124,55 +120,48 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 									Constants.SELECTION_BUTTON_WIDTH, Constants.SELECTION_BUTTON_HEIGHT);
 						}
 					}
+					
 					menuButtons.get(6).setRect(Constants.BOTTOM_BUTTON_X_1, Constants.BOTTOM_BUTTON_Y, Constants.BOTTOM_BUTTON_WIDTH, Constants.BOTTOM_BUTTON_HEIGHT);
 					menuButtons.get(7).setRect(Constants.BOTTOM_BUTTON_X_2, Constants.BOTTOM_BUTTON_Y, Constants.BOTTOM_BUTTON_WIDTH, Constants.BOTTOM_BUTTON_HEIGHT);
 					mouseCounter = Constants.MOUSE_COOLDOWN;
 				} else if (mouse.intersects(menuButtons.get(1))) {
-
-					// Moves into How To Play section
 					menuButtons.clear();
 					menuButtons.add(new Rectangle(Constants.BOTTOM_BUTTON_X_1, Constants.BOTTOM_BUTTON_Y, Constants.BOTTOM_BUTTON_WIDTH, Constants.BOTTOM_BUTTON_HEIGHT));
 					menuState = MenuStates.HTP;
 					mouseCounter = Constants.MOUSE_COOLDOWN;
 				} else if (mouse.intersects(menuButtons.get(2))) {
-
-					// Exits the game
 					System.exit(0);
 				}
 			}
 			break;
 		case SELECTION:
-			// Updates mouse "hitbox"
 			mouse.setRect(mouseX, mouseY, 1, 1);
 
-			// Selects the difficulty and size
 			if (mouseClicked && mouseCounter == 0) {
 				for (int i = 0; i < 3; i++) {
 					if (mouse.intersects(menuButtons.get(2 * i))) {
 						difficulty = i + 1;
 						pointerOneY = Constants.POINTER_X_DISPLACE + i * Constants.POINTER_BETWEEN_DISPLACE;
 					}
+					
 					if (mouse.intersects(menuButtons.get(2 * i + 1))) {
 						size = i + 1;
 						pointerTwoY = Constants.POINTER_X_DISPLACE + i * Constants.POINTER_BETWEEN_DISPLACE;
 					}
 				}
 				if (mouse.intersects(menuButtons.get(6))) {
-
-					// Moves back into the menu
 					menuState = MenuStates.MENU;
 					menuButtons.clear();
 					mouseCounter = Constants.MOUSE_COOLDOWN;
+					
 					for (int i = 0; i < 3; i++) {
 						menuButtons.add(new Rectangle(0, 0, 0, 0));
 					}
 				} else if (mouse.intersects(menuButtons.get(7))) {
 
-					// Moves into the game and generates the selected map
 					if (pointerOneY != 0 && pointerTwoY != 0) {
 						setSwitchPanel(false);
 
-						// Resets menu variables
 						difficulty = 0;
 						size = 0;
 						pointerOneY = 0;
