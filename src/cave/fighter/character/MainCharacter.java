@@ -40,8 +40,8 @@ public class MainCharacter {
 
 	private attackStates attack;
 
-	private static Rectangle rect;
-	private static Rectangle rect2;
+	private Rectangle rect;
+	private Rectangle rect2;
 
 	private MainCharacter() {
 		health = Constants.CHAR_START_HEALTH;
@@ -66,7 +66,7 @@ public class MainCharacter {
 		rect2 = new Rectangle(0, 0, 0, 0);
 	}
 
-	public MainCharacter getCharacterInstance(){
+	public static MainCharacter getCharacterInstance(){
 		return instance;
 	}
 	
@@ -299,5 +299,13 @@ public class MainCharacter {
 
 	public void setAnimationIndexBody(int animationIndexBody) {
 		this.animationIndexBody = animationIndexBody;
+	}
+
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	public Rectangle getRect2() {
+		return rect2;
 	}
 }
