@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import cave.fighter.enums.AttackStates;
 import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
 import animation.framework.Animation;
@@ -34,11 +35,7 @@ public class MainCharacter {
 
 	private ArrayList<Projectile> projectiles;
 
-	private enum attackStates {
-		UP, DOWN, LEFT, RIGHT, STATIC
-	}
-
-	private attackStates attack;
+	public AttackStates attack;
 
 	private Rectangle rect;
 	private Rectangle rect2;
@@ -61,7 +58,7 @@ public class MainCharacter {
 		alive = true;
 
 		projectiles = new ArrayList<Projectile>();
-		attack = attackStates.STATIC;
+		attack = AttackStates.STATIC;
 		rect = new Rectangle(0, 0, 0, 0);
 		rect2 = new Rectangle(0, 0, 0, 0);
 	}
@@ -85,7 +82,7 @@ public class MainCharacter {
 		if (headCounter > 0) {
 			headCounter--;
 		} else {
-			attack = attackStates.STATIC;
+			attack = AttackStates.STATIC;
 		}
 		
 		if (damageCounter > 0) {

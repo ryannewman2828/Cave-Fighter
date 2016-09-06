@@ -1,5 +1,7 @@
 package cave.fighter.boss;
 
+import game.Enemy;
+
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
@@ -31,4 +33,30 @@ public abstract class Boss {
 		
 	}
 
+	public int getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Enemy getBossAnimation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public BossHealthBar getHpBar() {
+		// TODO Auto-generated method stub
+		return new BossHealthBar();
+	}
+
+	public class BossHealthBar{
+		public int getSize(){
+			return 0;
+		}
+	}
+	
 }

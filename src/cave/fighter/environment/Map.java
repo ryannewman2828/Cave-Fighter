@@ -1,14 +1,15 @@
 package cave.fighter.environment;
 
-import game.GamePanel;
 import game.GamePanel.gameStates;
-import game.GamePanel.moveStates;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import cave.fighter.GamePanel;
 import cave.fighter.character.MainCharacter;
+import cave.fighter.enums.GameStates;
+import cave.fighter.enums.MoveStates;
 import cave.fighter.utilities.Constants;
 
 public class Map {
@@ -19,7 +20,7 @@ public class Map {
 	int randX, randY;
 	private MainCharacter character;
 
-	public static moveStates move = moveStates.STATIC;
+	public MoveStates move = MoveStates.STATIC;
 
 	private Rectangle boundTop1;
 	private Rectangle boundTop2;
@@ -286,8 +287,8 @@ public class Map {
 	public void moveAboveRoom() {
 		activeRoom = activeRoom.getAboveRoom();
 		if (activeRoom.isBossRoom()) {
-			GamePanel.setGameState(gameStates.BOSS_SPAWN);
-			move = moveStates.STATIC;
+			GamePanel.gameState = GameStates.BOSS_SPAWN;
+			move = MoveStates.STATIC;
 			activeRoom.setBlockBot(new Rectangle(360, 460, 90, 10));
 		}
 	}
@@ -298,10 +299,6 @@ public class Map {
 
 	public Room getActiveRoom() {
 		return activeRoom;
-	}
-
-	public MainCharacter getCharacter() {
-		return character;
 	}
 
 	// Prints map to console
