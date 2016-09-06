@@ -53,6 +53,15 @@ public final class Constants {
 	public static final int CHAR_BULLET_Y_DISPLACE = 12;
 	public static final int CHAR_BULLET_COOLDOWN = 120;
 	
+	public static final int MAP_ROOM_OFFSET = 3;
+	public static final int MAP_ROOM_SMALL = 9;
+	public static final int MAP_ROOM_MEDIUM = 19;
+	public static final int MAP_ROOM_LARGE = 29;
+	public static final int MAP_ROOM_Y_START_TOP = 100;
+	public static final int MAP_ROOM_Y_START_BOT = 450;
+	public static final int MAP_ROOM_X_START_LEFT = 40;
+	public static final int MAP_ROOM_X_START_RIGHT = 740;
+
 	private Constants() 
 	{/* Utility Class */}
 
