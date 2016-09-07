@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +16,7 @@ import javax.imageio.ImageIO;
 
 import cave.fighter.boss.Boss;
 import cave.fighter.character.MainCharacter;
+import cave.fighter.utilities.Assets;
 
 public class Room {
 
@@ -38,13 +38,8 @@ public class Room {
 	private EnemyCreator ec;
 	private MainCharacter character;
 
-	//The graphics
+	// The graphics
 	private Graphics g2d;
-
-	//The room image
-	private Image originalImage;
-	private Image image = new BufferedImage(800, 480,
-			BufferedImage.TYPE_INT_ARGB);
 
 	private Rectangle spawnTop;
 	private Rectangle spawnBot;
@@ -64,46 +59,46 @@ public class Room {
 	// Constructor for the normal rooms
 	public Room(int difficulty) {
 		this();
-		//ec = new EnemyCreator(difficulty, false);
+		// ec = new EnemyCreator(difficulty, false);
 		enemies = ec.getEnemyList();
-		//redrawRoom();
+		// redrawRoom();
 	}
 
 	// Constructor for the starting room
 	public Room() {
 		character = MainCharacter.getCharacterInstance();
 		enemies = new ArrayList<Enemy>();
-		
+
 		hasLeft = false;
 		hasAbove = false;
 		hasRight = false;
 		hasBottom = false;
-		
+
 		roomCleared = false;
 		bossRoom = false;
-		
+
 		spawnTop = new Rectangle(361, 35, 90, 10);
 		spawnBot = new Rectangle(361, 470, 90, 10);
 		spawnLeft = new Rectangle(0, 220, 10, 80);
 		spawnRight = new Rectangle(790, 220, 10, 80);
-		
+
 		blockTop = new Rectangle(360, 80, 90, 10);
 		blockBot = new Rectangle(360, 460, 90, 10);
 		blockLeft = new Rectangle(10, 220, 10, 80);
 		blockRight = new Rectangle(780, 220, 10, 80);
-		
+
 		redrawRoom();
 	}
 
 	// Constructor for the boss room
 	public Room(int difficulty, boolean spawning) {
 		this();
-		//ec = new EnemyCreator(difficulty, spawning);
-		//redrawRoom();
+		// ec = new EnemyCreator(difficulty, spawning);
+		// redrawRoom();
 	}
 
 	public void update() {
-		
+
 		if (bossRoom) {
 			boss.update();
 			if (boss.isSpawnEnemy()) {
@@ -115,7 +110,8 @@ public class Room {
 		ArrayList<Enemy> enemy = getEnemies();
 		for (int i = 0; i < enemy.size(); i++) {
 			if (character.getRect().intersects(enemy.get(i).enemyHitBox)
-					|| character.getRect2().intersects(enemy.get(i).enemyHitBox)) {
+					|| character.getRect2()
+							.intersects(enemy.get(i).enemyHitBox)) {
 				character.getHurt(enemy.get(i).getDamage());
 			}
 		}
@@ -158,11 +154,12 @@ public class Room {
 			}
 		}
 
-		//Handles the collision between the boss and the player
+		// Handles the collision between the boss and the player
 		if (isBossRoom()) {
 			bossCollide = false;
 			for (int i = 0; i < getBoss().bossHitBoxes.size(); i++) {
-				if (getBoss().bossHitBoxes.get(i).intersects(character.getRect())
+				if (getBoss().bossHitBoxes.get(i).intersects(
+						character.getRect())
 						|| getBoss().bossHitBoxes.get(i).intersects(
 								character.getRect2())) {
 					bossCollide = true;
@@ -215,38 +212,29 @@ public class Room {
 
 	}
 
-	//Method to draw the individual parts of the room onto the main image
+	// Method to draw the individual parts of the room onto the main image
 	public void redrawRoom() {
-		g2d = (Graphics2D) image.getGraphics();
-		try {
-			originalImage = ImageIO.read(new File("data/background.png"));
-			g2d.drawImage(originalImage, 0, 0, null);
-			if (hasRight && (roomCleared || rightRoom.isRoomCleared())) {
-				originalImage = ImageIO.read(new File("data/rightDoor.png"));
-				g2d.drawImage(originalImage, 730, 212, null);
+		
+		g2d = (Graphics2D) Assets.roomImage.getGraphics();
+		g2d.drawImage(Assets.background, 0, 0, null);
+		
+		if (hasRight && (roomCleared || rightRoom.isRoomCleared())) {
+			g2d.drawImage(Assets.rightDoor, 730, 212, null);
+		}
+		if (hasLeft && (roomCleared || leftRoom.isRoomCleared())) {
+			g2d.drawImage(Assets.leftDoor, 31, 212, null);
+		}
+		if (hasBottom && (roomCleared || bottomRoom.isRoomCleared())) {
+			g2d.drawImage(Assets.downDoor, 360, 418, null);
+		}
+		if (hasAbove && (roomCleared || aboveRoom.isRoomCleared())) {
+			if (aboveRoom.isBossRoom()) {
+				g2d.drawImage(Assets.bossDoor, 360, 0, null);
+			} else {
+				g2d.drawImage(Assets.upDoorOn, 360, 0, null);
 			}
-			if (hasLeft && (roomCleared || leftRoom.isRoomCleared())) {
-				originalImage = ImageIO.read(new File("data/leftDoor.png"));
-				g2d.drawImage(originalImage, 31, 212, null);
-			}
-			if (hasBottom && (roomCleared || bottomRoom.isRoomCleared())) {
-				originalImage = ImageIO.read(new File("data/downDoor.png"));
-				g2d.drawImage(originalImage, 360, 418, null);
-			}
-			if (hasAbove && (roomCleared || aboveRoom.isRoomCleared())) {
-				if (aboveRoom.isBossRoom()) {
-					originalImage = ImageIO.read(new File("data/bossDoor.png"));
-					g2d.drawImage(originalImage, 360, 0, null);
-				} else {
-					originalImage = ImageIO.read(new File("data/upDoor.png"));
-					g2d.drawImage(originalImage, 360, 0, null);
-				}
-			} else if (hasAbove) {
-				originalImage = ImageIO.read(new File("data/upDoor2.png"));
-				g2d.drawImage(originalImage, 360, 0, null);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} else if (hasAbove) {
+			g2d.drawImage(Assets.upDoorOff, 360, 0, null);
 		}
 	}
 
@@ -308,8 +296,8 @@ public class Room {
 
 	public void setRoomCleared(boolean roomCleared) {
 		this.roomCleared = roomCleared;
-		
-		//Removes blockers
+
+		// Removes blockers
 		if (hasAbove) {
 			blockTop = new Rectangle(0, 0, 0, 0);
 			aboveRoom.blockBot = new Rectangle(0, 0, 0, 0);
@@ -326,8 +314,7 @@ public class Room {
 			blockRight = new Rectangle(0, 0, 0, 0);
 			rightRoom.blockLeft = new Rectangle(0, 0, 0, 0);
 		}
-		
-		//Redraws room
+
 		redrawRoom();
 	}
 
@@ -349,10 +336,6 @@ public class Room {
 
 	public void setBoss(Boss boss) {
 		this.boss = boss;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 
 	public Image getPowerUp() {

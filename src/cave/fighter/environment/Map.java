@@ -1,7 +1,5 @@
 package cave.fighter.environment;
 
-import game.GamePanel.gameStates;
-
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;

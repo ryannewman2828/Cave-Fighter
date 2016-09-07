@@ -1,6 +1,5 @@
 package cave.fighter.utilities;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +58,14 @@ public final class Assets {
 			headImage = ImageIO.read(new File(String.format(FACE_ANIMATION_URL, 0)));
 			
 			// Room image setup
+			roomImage = new BufferedImage(800, 480, BufferedImage.TYPE_INT_ARGB);
+			background = ImageIO.read(new File(BACKGROUND_URL));
+			rightDoor = ImageIO.read(new File(RIGHT_DOOR_URL));
+			leftDoor = ImageIO.read(new File(LEFT_DOOR_URL));
+			downDoor = ImageIO.read(new File(DOWN_DOOR_URL));
+			upDoorOn = ImageIO.read(new File(UP_DOOR_ON_URL));
+			upDoorOff = ImageIO.read(new File(UP_DOOR_OFF_URL));
+			bossDoor = ImageIO.read(new File(BOSS_DOOR_URL));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,7 +91,17 @@ public final class Assets {
 	public static Animation[] bodyAnimation;
 	public static Animation[] headAnimation;
 	public static Animation damageBuffer;
-
+	
+	public static BufferedImage roomImage;
+	public static BufferedImage background;
+	public static BufferedImage rightDoor;
+	public static BufferedImage leftDoor;
+	public static BufferedImage downDoor;
+	public static BufferedImage upDoorOn;
+	public static BufferedImage upDoorOff;
+	public static BufferedImage bossDoor;
+	
+	
 
 	// Menu constants
 	private static final String MENU_URL = "./resources/menu1.png";
@@ -107,6 +124,15 @@ public final class Assets {
 	private static final String BODY_ANIMATION_RIGHT_URL = "./resources/right%d.png";
 	private static final String BODY_ANIMATION_BACK_URL = "./resources/back%d.png";
 	private static final String FACE_ANIMATION_URL = "./resources/face%d.png";
+	
+	// Room constants
+	private static final String BACKGROUND_URL = "./resources/background.png";
+	private static final String RIGHT_DOOR_URL = "./resources/rightDoor.png";
+	private static final String LEFT_DOOR_URL = "./resources/leftDoor.png";
+	private static final String DOWN_DOOR_URL = "./resources/downDoor.png";
+	private static final String UP_DOOR_ON_URL = "./resources/upDoorOn.png";
+	private static final String UP_DOOR_OFF_URL = "./resources/upDoorOff.png";
+	private static final String BOSS_DOOR_URL = "./resources/bossDoor.png";
 
 	private Assets() 
 	{/* Utility Class */}

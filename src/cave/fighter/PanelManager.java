@@ -31,7 +31,10 @@ public class PanelManager {
 	// TODO make this more extendable later
 	public void switchPanel(){
 		if(curPanel == menuPanel){
+			gamePanel.setSize(curPanel.getMapSize());
+			gamePanel.setDifficulty(curPanel.getDifficulty());
 			curPanel = gamePanel;
+			((GamePanel) gamePanel).setUpMap();
 		} else {
 			curPanel = menuPanel;
 		}
@@ -43,7 +46,7 @@ public class PanelManager {
 		while (true) {
 
 			curPanel.run();
-			
+						
 			if(curPanel.isSwitchPanel()){
 				switchPanel();
 			}

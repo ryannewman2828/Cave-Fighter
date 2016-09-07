@@ -6,8 +6,6 @@ import game.Projectile;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
@@ -19,7 +17,6 @@ import cave.fighter.enums.GameStates;
 import cave.fighter.enums.MoveStates;
 import cave.fighter.environment.Map;
 import cave.fighter.utilities.Assets;
-import cave.fighter.utilities.Constants;
 
 public class GamePanel extends CaveFighterPanel implements KeyListener {
 
@@ -39,10 +36,14 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 	public static GameStates gameState = GameStates.RUNNING;
 
 	public GamePanel() throws IOException {
-
+		
 		setSwitchPanel(false);
 
 		addKeyListener(this);
+	}
+
+	public void setUpMap() {
+		map = new Map(getDifficulty(), getMapSize());
 	}
 
 	@Override
@@ -129,17 +130,12 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 	@Override
 	public void run() {
 
-		// Handles gamestates
 		switch (gameState) {
 		case BOSS_SPAWN:
-
-			// Updates the map
 			map.update();
 			break;
 		case RUNNING:
 		case BOSS_BATTLE:
-
-			// Handles updating the moveStates
 			if (wPressed) {
 				map.move = MoveStates.UP;
 			} else if (sPressed) {
@@ -152,10 +148,8 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 				map.move = MoveStates.STATIC;
 			}
 
-			// Updates the map
 			map.update();
 
-			// Handles the updating of the attack States
 			if (upPressed
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.UP;
@@ -183,11 +177,13 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 		}
 
+		System.out.println("game");
+		
 		animate();
 		repaint();
 	}
 
-	public void animate() {
+	private void animate() {
 		if (gameState == GameStates.RUNNING
 				|| gameState == GameStates.BOSS_BATTLE
 				|| gameState == GameStates.BOSS_SPAWN
@@ -209,8 +205,8 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			}
 
 			if (map.getActiveRoom().isBossRoom()) {
-				//TODO uncomment this line
-				//map.getActiveRoom().getBoss().getBossAnimation().update(10);
+				// TODO uncomment this line
+				// map.getActiveRoom().getBoss().getBossAnimation().update(10);
 			}
 
 			ArrayList<Enemy> enemies = map.getActiveRoom().getEnemies();
@@ -285,7 +281,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	public void drawRoom(Graphics g) {
 
-		g.drawImage(map.getActiveRoom().getImage(), 0, 0, this);
+		g.drawImage(Assets.roomImage, 0, 0, this);
 
 		ArrayList projectiles = MainCharacter.getCharacterInstance()
 				.getProjectiles();

@@ -133,7 +133,7 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 			break;
 		case SELECTION:
 			mouse.setRect(mouseX, mouseY, 1, 1);
-
+			
 			if (mouseClicked && mouseCounter == 0) {
 				for (int i = 0; i < 3; i++) {
 					if (mouse.intersects(menuButtons.get(2 * i))) {
@@ -156,10 +156,12 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 					}
 					
 				} else if (mouse.intersects(menuButtons.get(7))) {
-
 					if (pointerOneY != 0 && pointerTwoY != 0) {
-						setSwitchPanel(false);
-
+						setSwitchPanel(true);
+						
+						setDifficulty(difficulty);
+						setSize(size);
+						
 						difficulty = 0;
 						size = 0;
 						pointerOneY = 0;
