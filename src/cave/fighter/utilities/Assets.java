@@ -1,5 +1,6 @@
 package cave.fighter.utilities;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,14 @@ public final class Assets {
 			pointer1 = ImageIO.read(new File(POINTER_1_URL));
 			pointer2 = ImageIO.read(new File(POINTER_2_URL));
 
+			// GamePanel image setup
+			walls = ImageIO.read(new File(WALLS_URL));
+			fullHeart = ImageIO.read(new File(FULL_HEART_URL));
+			halfHeart = ImageIO.read(new File(HALF_HEART_URL));
+			emptyHeart = ImageIO.read(new File(EMPTY_HEART_URL));
+			dead = ImageIO.read(new File(DEAD_URL));
+			gameOver = ImageIO.read(new File(GAME_OVER_URL));
+			
 			// Character image setup
 			damageBuffer.addFrame(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), 1);
 			for (int i = 0; i < 3; i++) {
@@ -48,6 +57,8 @@ public final class Assets {
 				headAnimation[i / 2].addFrame(ImageIO.read(new File(String.format(FACE_ANIMATION_URL, i + 1))), 100);
 			}
 			headImage = ImageIO.read(new File(String.format(FACE_ANIMATION_URL, 0)));
+			
+			// Room image setup
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -60,6 +71,13 @@ public final class Assets {
 	public static BufferedImage htp;
 	public static BufferedImage pointer1;
 	public static BufferedImage pointer2;
+	
+	public static BufferedImage walls;
+	public static BufferedImage fullHeart;
+	public static BufferedImage halfHeart;
+	public static BufferedImage emptyHeart;
+	public static BufferedImage dead;
+	public static BufferedImage gameOver;
 
 	public static BufferedImage headImage; 
 	public static BufferedImage bodyImage;
@@ -75,6 +93,14 @@ public final class Assets {
 	private static final String POINTER_1_URL = "./resources/pointer0.png";
 	private static final String POINTER_2_URL = "./resources/pointer1.png";
 	
+	// Game constants
+	private static final String WALLS_URL = "./resources/walls.png";
+	private static final String FULL_HEART_URL = "./resources/heart2.png";
+	private static final String HALF_HEART_URL = "./resources/heart1.png";
+	private static final String EMPTY_HEART_URL = "./resources/heart0.png";
+	private static final String DEAD_URL = "./resources/defeat.png";
+	private static final String GAME_OVER_URL = "./resources/victory.png";
+	
 	// Character constants
 	private static final String BODY_ANIMATION_FRONT_URL = "./resources/front%d.png";
 	private static final String BODY_ANIMATION_LEFT_URL = "./resources/left%d.png";
@@ -82,7 +108,7 @@ public final class Assets {
 	private static final String BODY_ANIMATION_BACK_URL = "./resources/back%d.png";
 	private static final String FACE_ANIMATION_URL = "./resources/face%d.png";
 
-	private Assets() {/* Utility Class */
-	}
+	private Assets() 
+	{/* Utility Class */}
 
 }

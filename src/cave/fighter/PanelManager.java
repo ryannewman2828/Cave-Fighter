@@ -48,7 +48,6 @@ public class PanelManager {
 				switchPanel();
 			}
 			
-			// pause every 17 milliseconds
 			// (runs program at 60 frames per second)
 			Thread.sleep(17);
 		}

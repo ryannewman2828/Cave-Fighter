@@ -67,6 +67,29 @@ public class MainCharacter {
 		return instance;
 	}
 	
+	public void resetCharacter(){
+		health = Constants.CHAR_START_HEALTH;
+		curHealth = Constants.CHAR_START_HEALTH;
+		speed = Constants.CHAR_START_SPEED;
+		fireRate = Constants.CHAR_START_FIRE_RATE;
+		bulletSpeed = Constants.CHAR_START_BULLET_SPEED;
+		x = Constants.CHAR_START_X;
+		y = Constants.CHAR_START_Y;
+		fireCounter = 0;
+		damageCounter = 0;
+		headCounter = 0;
+		damage = Constants.CHAR_START_DAMAGE;
+		animationIndexHead = 0;
+		animationIndexBody = 0;
+		fireReady = false;
+		alive = true;
+
+		projectiles = new ArrayList<Projectile>();
+		attack = AttackStates.STATIC;
+		rect = new Rectangle(0, 0, 0, 0);
+		rect2 = new Rectangle(0, 0, 0, 0);
+	}
+	
 	public void update() {
 		rect.setRect(x - Constants.CHAR_HITBOX_1_X_DISPLACE, y - Constants.CHAR_HITBOX_1_Y_DISPLACE, Constants.CHAR_HITBOX_1_WIDTH, Constants.CHAR_HITBOX_1_HEIGHT);
 		rect2.setRect(x - Constants.CHAR_HITBOX_2_X_DISPLACE, y - Constants.CHAR_HITBOX_2_Y_DISPLACE, Constants.CHAR_HITBOX_2_WIDTH, Constants.CHAR_HITBOX_2_HEIGHT);
@@ -261,7 +284,7 @@ public class MainCharacter {
 		return Assets.headImage;
 	}
 
-	public Image getBodyImage() {
+	public BufferedImage getBodyImage() {
 		if (damageCounter / 10 % 2 == 1) {
 			return new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 		}

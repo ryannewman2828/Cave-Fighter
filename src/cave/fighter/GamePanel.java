@@ -18,6 +18,7 @@ import cave.fighter.enums.AttackStates;
 import cave.fighter.enums.GameStates;
 import cave.fighter.enums.MoveStates;
 import cave.fighter.environment.Map;
+import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
 
 public class GamePanel extends CaveFighterPanel implements KeyListener {
@@ -32,12 +33,6 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 	private boolean rightPressed = false;
 
 	private int counter = 0;
-
-	private Image imgWalls;
-
-	private Image fullHeart, halfHeart, emptyHeart;
-
-	private Image dead, gameOver;
 
 	private Map map;
 
@@ -74,7 +69,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			}
 
 			g2d.drawImage(map.getActiveRoom().getPowerUp(), 400, 240, this);
-			g2d.drawImage(imgWalls, 0, 0, this);
+			g2d.drawImage(Assets.walls, 0, 0, this);
 			break;
 		case BOSS_SPAWN:
 		case BOSS_BATTLE:
@@ -102,7 +97,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 					- map.getActiveRoom().getBoss().getBossAnimation()
 							.getImage().getHeight(getParent()) / 2, this);
 
-			g2d.drawImage(imgWalls, 0, 0, this);
+			g2d.drawImage(Assets.walls, 0, 0, this);
 
 			g2d.setColor(Color.BLACK);
 			g2d.fillRect(495, 40, 210, 30);
@@ -115,15 +110,15 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		case DEAD:
 
 			drawRoom(g2d);
-			g2d.drawImage(imgWalls, 0, 0, this);
-			g2d.drawImage(dead, 0, 0, this);
+			g2d.drawImage(Assets.walls, 0, 0, this);
+			g2d.drawImage(Assets.dead, 0, 0, this);
 			break;
 		case GAME_OVER:
 
 			drawRoom(g2d);
 			drawCharacter(g2d);
-			g2d.drawImage(imgWalls, 0, 0, this);
-			g2d.drawImage(gameOver, 0, 0, this);
+			g2d.drawImage(Assets.walls, 0, 0, this);
+			g2d.drawImage(Assets.gameOver, 0, 0, this);
 			break;
 		default:
 			break;
@@ -306,13 +301,13 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		counter = MainCharacter.getCharacterInstance().getCurHealth();
 		for (int i = 0; i < MainCharacter.getCharacterInstance().getHealth() / 2; i++) {
 			if (counter - 2 >= 0) {
-				g.drawImage(fullHeart, 60 * i + 40, 30, this);
+				g.drawImage(Assets.fullHeart, 60 * i + 40, 30, this);
 				counter -= 2;
 			} else if (counter - 1 >= 0) {
-				g.drawImage(halfHeart, 60 * i + 40, 30, this);
+				g.drawImage(Assets.halfHeart, 60 * i + 40, 30, this);
 				counter -= 1;
 			} else {
-				g.drawImage(emptyHeart, 60 * i + 40, 30, this);
+				g.drawImage(Assets.emptyHeart, 60 * i + 40, 30, this);
 			}
 		}
 	}

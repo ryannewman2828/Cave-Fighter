@@ -9,15 +9,12 @@ import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import cave.fighter.enums.MenuStates;
 import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
 
 public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 		MouseListener {
-
-	private enum MenuStates {
-		MENU, SELECTION, HTP
-	}
 
 	private int mouseX, mouseY;
 	private int mouseCounter = 0;
@@ -157,6 +154,7 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 					for (int i = 0; i < 3; i++) {
 						menuButtons.add(new Rectangle(0, 0, 0, 0));
 					}
+					
 				} else if (mouse.intersects(menuButtons.get(7))) {
 
 					if (pointerOneY != 0 && pointerTwoY != 0) {
@@ -176,9 +174,7 @@ public class MenuPanel extends CaveFighterPanel implements MouseMotionListener,
 			break;
 		}
 
-		// redraw everything in the GamePanel
 		repaint();
-
 	}
 
 	@Override
