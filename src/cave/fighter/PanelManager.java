@@ -39,6 +39,7 @@ public class PanelManager {
 			curPanel = menuPanel;
 		}
 		jFrame.setContentPane(curPanel);
+		curPanel.requestFocus();
 	}
 	
 	public void run() throws InterruptedException{

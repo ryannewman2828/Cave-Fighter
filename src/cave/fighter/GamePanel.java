@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -39,9 +41,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		
 		setSwitchPanel(false);
 
-		this.setFocusable(true);
-		this.requestFocusInWindow();
-		this.addKeyListener(this);
+		addKeyListener(this);
 	}
 
 	public void setUpMap() {
@@ -138,11 +138,9 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 		case RUNNING:
 		case BOSS_BATTLE:
-			//System.out.println(sPressed);
 			if (wPressed) {
 				map.move = MoveStates.UP;
 			} else if (sPressed) {
-				System.out.println("press down");
 				map.move = MoveStates.DOWN;
 			} else if (aPressed) {
 				map.move = MoveStates.LEFT;
@@ -312,7 +310,6 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("ff");
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			upPressed = true;
@@ -345,7 +342,6 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("fgrvf");
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			upPressed = false;

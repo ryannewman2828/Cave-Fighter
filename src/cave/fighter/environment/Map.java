@@ -103,7 +103,6 @@ public class Map {
 
 		switch (move) {
 		case DOWN:
-			System.out.println("down");
 			character.setAnimationIndexBody(0);
 			character.setAnimationIndexHead(0);
 			if (!character.getRect().intersects(boundBot1)
