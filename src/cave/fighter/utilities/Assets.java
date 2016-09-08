@@ -15,6 +15,7 @@ public final class Assets {
 		bodyAnimation = new Animation[4];
 		headAnimation = new Animation[4];
 		damageBuffer = new Animation();
+		powerUp = new BufferedImage[5];
 
 		for (int i = 0; i < 4; i++) {
 			bodyAnimation[i] = new Animation();
@@ -66,7 +67,9 @@ public final class Assets {
 			upDoorOn = ImageIO.read(new File(UP_DOOR_ON_URL));
 			upDoorOff = ImageIO.read(new File(UP_DOOR_OFF_URL));
 			bossDoor = ImageIO.read(new File(BOSS_DOOR_URL));
-
+			for (int i = 0; i < powerUp.length; i++) {
+				powerUp[i] = ImageIO.read(new File(String.format(POWER_UP_URL, i)));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -100,7 +103,7 @@ public final class Assets {
 	public static BufferedImage upDoorOn;
 	public static BufferedImage upDoorOff;
 	public static BufferedImage bossDoor;
-	
+	public static BufferedImage[] powerUp;
 	
 
 	// Menu constants
@@ -133,6 +136,7 @@ public final class Assets {
 	private static final String UP_DOOR_ON_URL = "./resources/upDoorOn.png";
 	private static final String UP_DOOR_OFF_URL = "./resources/upDoorOff.png";
 	private static final String BOSS_DOOR_URL = "./resources/bossDoor.png";
+	private static final String POWER_UP_URL = "./resources/icon%d.png";
 
 	private Assets() 
 	{/* Utility Class */}

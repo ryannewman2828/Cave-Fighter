@@ -61,6 +61,8 @@ public final class Constants {
 	public static final int MAP_ROOM_Y_START_BOT = 450;
 	public static final int MAP_ROOM_X_START_LEFT = 40;
 	public static final int MAP_ROOM_X_START_RIGHT = 740;
+	
+	public static final int NUM_ENEMY_TYPE = 4;
 
 	private Constants() 
 	{/* Utility Class */}

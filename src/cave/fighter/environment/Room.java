@@ -1,21 +1,17 @@
 package cave.fighter.environment;
 
-import game.Enemy;
-import game.EnemyCreator;
 import game.Projectile;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import cave.fighter.boss.Boss;
 import cave.fighter.character.MainCharacter;
+import cave.fighter.enemies.Enemy;
+import cave.fighter.enemies.EnemyFactory;
 import cave.fighter.utilities.Assets;
 
 public class Room {
@@ -30,12 +26,12 @@ public class Room {
 	private boolean hasRight;
 	private boolean hasBottom;
 
+	private int difficulty;
 	private boolean roomCleared;
 	private boolean bossRoom;
 	private boolean bossCollide;
 	private ArrayList<Enemy> enemies;
 	private Boss boss;
-	private EnemyCreator ec;
 	private MainCharacter character;
 
 	// The graphics
@@ -51,16 +47,13 @@ public class Room {
 	private Rectangle blockLeft;
 	private Rectangle blockRight;
 
-	// Powerup variables
-	private Image powerUp;
-	private Rectangle powerUpHitBox = new Rectangle(0, 0, 0, 0);
+	private Rectangle powerUpHitBox;
 	private int powerUpID;
 
 	// Constructor for the normal rooms
 	public Room(int difficulty) {
 		this();
-		// ec = new EnemyCreator(difficulty, false);
-		enemies = ec.getEnemyList();
+		enemies = EnemyFactory.getEnemyList(difficulty);
 		// redrawRoom();
 	}
 
@@ -86,6 +79,8 @@ public class Room {
 		blockBot = new Rectangle(360, 460, 90, 10);
 		blockLeft = new Rectangle(10, 220, 10, 80);
 		blockRight = new Rectangle(780, 220, 10, 80);
+		
+		powerUpHitBox = new Rectangle(0, 0, 0, 0);
 
 		redrawRoom();
 	}
@@ -93,7 +88,7 @@ public class Room {
 	// Constructor for the boss room
 	public Room(int difficulty, boolean spawning) {
 		this();
-		// ec = new EnemyCreator(difficulty, spawning);
+		this.difficulty = difficulty;
 		// redrawRoom();
 	}
 
@@ -102,7 +97,7 @@ public class Room {
 		if (bossRoom) {
 			boss.update();
 			if (boss.isSpawnEnemy()) {
-				enemies.add(ec.spawnEnemy());
+				enemies.add(EnemyFactory.spawnEnemy(difficulty));
 			}
 		}
 
@@ -132,7 +127,6 @@ public class Room {
 		if (character.getRect().intersects(powerUpHitBox)
 				|| character.getRect2().intersects(powerUpHitBox)) {
 			powerUpHitBox.setRect(0, 0, 0, 0);
-			powerUp = null;
 			switch (powerUpID) {
 			case 0:
 				character.increaseHealth();
@@ -198,13 +192,6 @@ public class Room {
 						// spawns the powerup for the map
 						powerUpHitBox.setRect(400, 240, 40, 40);
 						powerUpID = (int) (Math.random() * 8);
-						try {
-							if (powerUpID < 5)
-								powerUp = ImageIO.read(new File("data/icon"
-										+ powerUpID + ".png"));
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
 					}
 				}
 			}
@@ -339,11 +326,7 @@ public class Room {
 	}
 
 	public Image getPowerUp() {
-		return powerUp;
-	}
-
-	public void setPowerUp(Image powerUp) {
-		this.powerUp = powerUp;
+		return Assets.powerUp[powerUpID];
 	}
 
 	public Rectangle getSpawnTop() {

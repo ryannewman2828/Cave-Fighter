@@ -1,6 +1,5 @@
 package cave.fighter;
 
-import game.Enemy;
 import game.Projectile;
 
 import java.awt.Color;
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cave.fighter.character.MainCharacter;
+import cave.fighter.enemies.Enemy;
 import cave.fighter.enums.AttackStates;
 import cave.fighter.enums.GameStates;
 import cave.fighter.enums.MoveStates;
@@ -39,7 +39,9 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		
 		setSwitchPanel(false);
 
-		addKeyListener(this);
+		this.setFocusable(true);
+		this.requestFocusInWindow();
+		this.addKeyListener(this);
 	}
 
 	public void setUpMap() {
@@ -136,9 +138,11 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 		case RUNNING:
 		case BOSS_BATTLE:
+			//System.out.println(sPressed);
 			if (wPressed) {
 				map.move = MoveStates.UP;
 			} else if (sPressed) {
+				System.out.println("press down");
 				map.move = MoveStates.DOWN;
 			} else if (aPressed) {
 				map.move = MoveStates.LEFT;
@@ -176,8 +180,6 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 
 		}
-
-		System.out.println("game");
 		
 		animate();
 		repaint();
@@ -310,8 +312,8 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("ff");
 		switch (e.getKeyCode()) {
-
 		case KeyEvent.VK_UP:
 			upPressed = true;
 			break;
@@ -343,8 +345,8 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		System.out.println("fgrvf");
 		switch (e.getKeyCode()) {
-
 		case KeyEvent.VK_UP:
 			upPressed = false;
 			break;

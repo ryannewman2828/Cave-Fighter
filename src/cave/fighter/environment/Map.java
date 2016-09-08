@@ -15,7 +15,6 @@ public class Map {
 	private ArrayList<Room> rooms;
 	private Room activeRoom;
 
-	int randX, randY;
 	private MainCharacter character;
 
 	public MoveStates move = MoveStates.STATIC;
@@ -53,15 +52,18 @@ public class Map {
 		switch (size) {
 		case 1:
 			GRID_SIZE = 7;
-			roomsLeft = (int) (Math.random() * Constants.MAP_ROOM_OFFSET) + Constants.MAP_ROOM_SMALL;
+			roomsLeft = (int) (Math.random() * Constants.MAP_ROOM_OFFSET)
+					+ Constants.MAP_ROOM_SMALL;
 			break;
 		case 2:
 			GRID_SIZE = 9;
-			roomsLeft = (int) (Math.random() * Constants.MAP_ROOM_OFFSET) + Constants.MAP_ROOM_MEDIUM;
+			roomsLeft = (int) (Math.random() * Constants.MAP_ROOM_OFFSET)
+					+ Constants.MAP_ROOM_MEDIUM;
 			break;
 		case 3:
 			GRID_SIZE = 11;
-			roomsLeft = (int) (Math.random() * Constants.MAP_ROOM_OFFSET) + Constants.MAP_ROOM_LARGE;
+			roomsLeft = (int) (Math.random() * Constants.MAP_ROOM_OFFSET)
+					+ Constants.MAP_ROOM_LARGE;
 			break;
 		default:
 			GRID_SIZE = 0;
@@ -78,6 +80,8 @@ public class Map {
 		randomize();
 
 		connectRooms();
+
+		int randX, randY;
 
 		while (!bossRoomSpawned) {
 			randX = (int) (Math.random() * GRID_SIZE);
@@ -97,9 +101,9 @@ public class Map {
 
 		activeRoom.update();
 
-		// Handles character movement
 		switch (move) {
 		case DOWN:
+			System.out.println("down");
 			character.setAnimationIndexBody(0);
 			character.setAnimationIndexHead(0);
 			if (!character.getRect().intersects(boundBot1)
