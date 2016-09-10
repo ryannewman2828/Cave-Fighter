@@ -99,19 +99,19 @@ public class EnemyFactory {
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3;
 			damage = difficulty;
 			return (new GreenSlime(400, 140, speed, health, damage));
-			// Spawns blue slime
+		// Spawns blue slime
 		case 1:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3;
 			damage = difficulty + 2;
 			return (new BlueSlime(400, 140, speed, health, damage));
-			// Spawns yellow slime
+		// Spawns yellow slime
 		case 2:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3;
 			damage = difficulty;
 			return (new YellowSlime(400, 140, speed, health, damage));
-			// Spawns red slime
+		// Spawns red slime
 		case 3:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3
@@ -129,7 +129,7 @@ public class EnemyFactory {
 		return (new Tentacle(MainCharacter.getCharacterInstance().getX(), MainCharacter.getCharacterInstance().getY(), speed, health, damage));
 	}
 
-	private EnemyFactory() {/* Utility Class */
-	}
+	private EnemyFactory() 
+	{/* Utility Class */}
 
 }

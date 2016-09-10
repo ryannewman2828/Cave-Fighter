@@ -1,14 +1,35 @@
 package cave.fighter.enemies;
 
-public class BlueSlime extends Enemy{
+import cave.fighter.utilities.Assets;
 
-	public BlueSlime(int possiblespawnsx, int possiblespawnsy, int speed, int health, int damage) {
-		super(0, 0, 0, 0, 0);	}
+public class BlueSlime extends Enemy {
+
+	public BlueSlime(int x, int y, int speed, int health, int damage) {
+		super(x, y, speed, health, damage);
+		
+		setEnemyAnimation(Assets.blueSlimeAnim);
+		setImage(Assets.blueSlime);
+	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+		if (isSpawning()) {
 
+			//Spawns
+			fade();
+
+			//The after spawn
+			if (getCounter() >= 120) {
+				setSpawning(false);
+				setEnemyAnimation(Assets.blueSlimeAnim);
+			}
+		} else {
+
+			if (getHealth() <= 0) {
+				setAlive(false);
+			}
+			
+			enemyHitBox.setRect(getX() - 16, getY() - 12, 32, 24);
+		}
+	}
 }

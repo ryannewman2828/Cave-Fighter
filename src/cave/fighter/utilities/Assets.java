@@ -1,7 +1,6 @@
 package cave.fighter.utilities;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,6 +19,10 @@ public final class Assets {
 		damageBuffer = new Animation();
 		powerUp = new BufferedImage[5];
 		bulletAnimation = new Animation[4];
+		greenSlimeAnim = new Animation();
+		blueSlimeAnim = new Animation();
+		redSlimeAnim = new Animation();
+		yellowSlimeAnim = new Animation();
 
 		for (int i = 0; i < 4; i++) {
 			bodyAnimation[i] = new Animation();
@@ -106,6 +109,22 @@ public final class Assets {
 				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(3 * Math.PI / 2, 16, 16), null);
 				bulletAnimation[3].addFrame(image, 100);
 			}
+			
+			// Enemy image setup
+			for (int i = 0; i < 3; i++) {
+				greenSlimeAnim.addFrame(ImageIO.read(new File(String.format(GREEN_SLIME_URL, i))), 100);
+				blueSlimeAnim.addFrame(ImageIO.read(new File(String.format(BLUE_SLIME_URL, i))), 100);
+				redSlimeAnim.addFrame(ImageIO.read(new File(String.format(RED_SLIME_URL, i))), 100);
+				yellowSlimeAnim.addFrame(ImageIO.read(new File(String.format(YELLOW_SLIME_URL, i))), 100);
+			}
+			greenSlimeAnim.addFrame(ImageIO.read(new File(String.format(GREEN_SLIME_URL, 1))), 100);
+			greenSlime = ImageIO.read(new File(String.format(GREEN_SLIME_URL, 0)));
+			blueSlimeAnim.addFrame(ImageIO.read(new File(String.format(BLUE_SLIME_URL, 1))), 100);
+			blueSlime = ImageIO.read(new File(String.format(BLUE_SLIME_URL, 0)));
+			redSlimeAnim.addFrame(ImageIO.read(new File(String.format(RED_SLIME_URL, 1))), 100);
+			redSlime = ImageIO.read(new File(String.format(RED_SLIME_URL, 0)));
+			yellowSlimeAnim.addFrame(ImageIO.read(new File(String.format(YELLOW_SLIME_URL, 1))), 100);
+			yellowSlime = ImageIO.read(new File(String.format(YELLOW_SLIME_URL, 0)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -142,6 +161,15 @@ public final class Assets {
 	public static BufferedImage[] powerUp;
 
 	public static Animation[] bulletAnimation;
+	
+	public static BufferedImage greenSlime;
+	public static Animation greenSlimeAnim;
+	public static BufferedImage blueSlime;
+	public static Animation blueSlimeAnim;
+	public static BufferedImage redSlime;
+	public static Animation redSlimeAnim;
+	public static BufferedImage yellowSlime;
+	public static Animation yellowSlimeAnim;
 
 	private static Graphics2D g2d;
 	private static BufferedImage image;
@@ -179,6 +207,12 @@ public final class Assets {
 	private static final String POWER_UP_URL = "./resources/icon%d.png";
 	
 	private static final String BULLET_URL = "./resources/fire%d.png";
+	
+	private static final String GREEN_SLIME_URL = "./resources/slime%d.png";
+	private static final String BLUE_SLIME_URL = "./resources/bslime%d.png";
+	private static final String RED_SLIME_URL = "./resources/rslime%d.png";
+	private static final String YELLOW_SLIME_URL = "./resources/yslime%d.png";
+
 
 	private Assets() 
 	{/* Utility Class */}
