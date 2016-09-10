@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import cave.fighter.boss.Boss;
@@ -80,6 +81,7 @@ public class Room {
 		blockRight = new Rectangle(780, 220, 10, 80);
 		
 		powerUpHitBox = new Rectangle(0, 0, 0, 0);
+		powerUpID = 7;
 
 		redrawRoom();
 	}
@@ -92,7 +94,7 @@ public class Room {
 	}
 
 	public void update() {
-
+		
 		if (bossRoom) {
 			boss.update();
 			if (boss.isSpawnEnemy()) {
@@ -145,6 +147,7 @@ public class Room {
 			default:
 				break;
 			}
+			powerUpID = 7;
 		}
 
 		// Handles the collision between the boss and the player
@@ -177,18 +180,14 @@ public class Room {
 		}
 
 		for (int i = 0; i < enemies.size(); i++) {
-			// Updates the enemies in the current map
 			enemies.get(i).update();
 
-			// if the enemies are dead, they get removed from the list
 			if (!enemies.get(i).isAlive()) {
 				enemies.remove(i);
 
-				// no enemies, room is cleared
 				if (enemies.isEmpty()) {
 					setRoomCleared(true);
 					if (!isBossRoom()) {
-						// spawns the powerup for the map
 						powerUpHitBox.setRect(400, 240, 40, 40);
 						powerUpID = (int) (Math.random() * 8);
 					}
@@ -325,7 +324,10 @@ public class Room {
 	}
 
 	public Image getPowerUp() {
-		return Assets.powerUp[powerUpID];
+		if(powerUpID < Assets.powerUp.length){
+			return Assets.powerUp[powerUpID];
+		}
+		return new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
 	}
 
 	public Rectangle getSpawnTop() {
