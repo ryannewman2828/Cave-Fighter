@@ -1,5 +1,8 @@
 package cave.fighter.utilities;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +19,12 @@ public final class Assets {
 		headAnimation = new Animation[4];
 		damageBuffer = new Animation();
 		powerUp = new BufferedImage[5];
+		bulletAnimation = new Animation[4];
 
 		for (int i = 0; i < 4; i++) {
 			bodyAnimation[i] = new Animation();
 			headAnimation[i] = new Animation();
+			bulletAnimation[i] = new Animation();
 		}
 
 		try {
@@ -38,26 +43,39 @@ public final class Assets {
 			emptyHeart = ImageIO.read(new File(EMPTY_HEART_URL));
 			dead = ImageIO.read(new File(DEAD_URL));
 			gameOver = ImageIO.read(new File(GAME_OVER_URL));
-			
+
 			// Character image setup
-			damageBuffer.addFrame(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), 1);
+			damageBuffer.addFrame(new BufferedImage(1, 1,
+					BufferedImage.TYPE_INT_ARGB), 1);
 			for (int i = 0; i < 3; i++) {
-				bodyAnimation[0].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_FRONT_URL, i))), 100);
-				bodyAnimation[1].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_LEFT_URL, i))), 100);
-				bodyAnimation[2].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_RIGHT_URL, i))), 100);
-				bodyAnimation[3].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_BACK_URL, i))), 100);
+				bodyAnimation[0].addFrame(ImageIO.read(new File(String.format(
+						BODY_ANIMATION_FRONT_URL, i))), 100);
+				bodyAnimation[1].addFrame(ImageIO.read(new File(String.format(
+						BODY_ANIMATION_LEFT_URL, i))), 100);
+				bodyAnimation[2].addFrame(ImageIO.read(new File(String.format(
+						BODY_ANIMATION_RIGHT_URL, i))), 100);
+				bodyAnimation[3].addFrame(ImageIO.read(new File(String.format(
+						BODY_ANIMATION_BACK_URL, i))), 100);
 			}
-			bodyAnimation[0].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_FRONT_URL, 1))), 100);
-			bodyAnimation[1].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_LEFT_URL, 1))), 100);
-			bodyAnimation[2].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_RIGHT_URL, 1))), 100);
-			bodyAnimation[3].addFrame(ImageIO.read(new File(String.format(BODY_ANIMATION_BACK_URL, 1))),100);
-			bodyImage = ImageIO.read(new File(String.format(BODY_ANIMATION_FRONT_URL, 1)));
+			bodyAnimation[0].addFrame(ImageIO.read(new File(String.format(
+					BODY_ANIMATION_FRONT_URL, 1))), 100);
+			bodyAnimation[1].addFrame(ImageIO.read(new File(String.format(
+					BODY_ANIMATION_LEFT_URL, 1))), 100);
+			bodyAnimation[2].addFrame(ImageIO.read(new File(String.format(
+					BODY_ANIMATION_RIGHT_URL, 1))), 100);
+			bodyAnimation[3].addFrame(ImageIO.read(new File(String.format(
+					BODY_ANIMATION_BACK_URL, 1))), 100);
+			bodyImage = ImageIO.read(new File(String.format(
+					BODY_ANIMATION_FRONT_URL, 1)));
 			for (int i = 0; i < 8; i += 2) {
-				headAnimation[i / 2].addFrame(ImageIO.read(new File(String.format(FACE_ANIMATION_URL, i))), 100);
-				headAnimation[i / 2].addFrame(ImageIO.read(new File(String.format(FACE_ANIMATION_URL, i + 1))), 100);
+				headAnimation[i / 2].addFrame(ImageIO.read(new File(String
+						.format(FACE_ANIMATION_URL, i))), 100);
+				headAnimation[i / 2].addFrame(ImageIO.read(new File(String
+						.format(FACE_ANIMATION_URL, i + 1))), 100);
 			}
-			headImage = ImageIO.read(new File(String.format(FACE_ANIMATION_URL, 0)));
-			
+			headImage = ImageIO.read(new File(String.format(FACE_ANIMATION_URL,
+					0)));
+
 			// Room image setup
 			roomImage = new BufferedImage(800, 480, BufferedImage.TYPE_INT_ARGB);
 			background = ImageIO.read(new File(BACKGROUND_URL));
@@ -68,7 +86,25 @@ public final class Assets {
 			upDoorOff = ImageIO.read(new File(UP_DOOR_OFF_URL));
 			bossDoor = ImageIO.read(new File(BOSS_DOOR_URL));
 			for (int i = 0; i < powerUp.length; i++) {
-				powerUp[i] = ImageIO.read(new File(String.format(POWER_UP_URL, i)));
+				powerUp[i] = ImageIO.read(new File(String.format(POWER_UP_URL,
+						i)));
+			}
+
+			// Projectile image setup
+			for (int i = 0; i < 4; i++) {
+				bulletAnimation[0].addFrame(ImageIO.read(new File(String.format(BULLET_URL, i))), 100);
+				image  = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				g2d = (Graphics2D) image.getGraphics();
+				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(Math.PI, 16, 16), null);
+				bulletAnimation[1].addFrame(image, 100);
+				image  = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				g2d = (Graphics2D) image.getGraphics();
+				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(Math.PI / 2, 16, 16), null);
+				bulletAnimation[2].addFrame(image, 100);
+				image  = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				g2d = (Graphics2D) image.getGraphics();
+				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(3 * Math.PI / 2, 16, 16), null);
+				bulletAnimation[3].addFrame(image, 100);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -81,7 +117,7 @@ public final class Assets {
 	public static BufferedImage htp;
 	public static BufferedImage pointer1;
 	public static BufferedImage pointer2;
-	
+
 	public static BufferedImage walls;
 	public static BufferedImage fullHeart;
 	public static BufferedImage halfHeart;
@@ -89,12 +125,12 @@ public final class Assets {
 	public static BufferedImage dead;
 	public static BufferedImage gameOver;
 
-	public static BufferedImage headImage; 
+	public static BufferedImage headImage;
 	public static BufferedImage bodyImage;
 	public static Animation[] bodyAnimation;
 	public static Animation[] headAnimation;
 	public static Animation damageBuffer;
-	
+
 	public static BufferedImage roomImage;
 	public static BufferedImage background;
 	public static BufferedImage rightDoor;
@@ -104,15 +140,19 @@ public final class Assets {
 	public static BufferedImage upDoorOff;
 	public static BufferedImage bossDoor;
 	public static BufferedImage[] powerUp;
-	
 
+	public static Animation[] bulletAnimation;
+
+	private static Graphics2D g2d;
+	private static BufferedImage image;
+	
 	// Menu constants
 	private static final String MENU_URL = "./resources/menu1.png";
 	private static final String SELECTION_URL = "./resources/menu2.png";
 	private static final String HTP_URL = "./resources/howtoplay.png";
 	private static final String POINTER_1_URL = "./resources/pointer0.png";
 	private static final String POINTER_2_URL = "./resources/pointer1.png";
-	
+
 	// Game constants
 	private static final String WALLS_URL = "./resources/walls.png";
 	private static final String FULL_HEART_URL = "./resources/heart2.png";
@@ -120,14 +160,14 @@ public final class Assets {
 	private static final String EMPTY_HEART_URL = "./resources/heart0.png";
 	private static final String DEAD_URL = "./resources/defeat.png";
 	private static final String GAME_OVER_URL = "./resources/victory.png";
-	
+
 	// Character constants
 	private static final String BODY_ANIMATION_FRONT_URL = "./resources/front%d.png";
 	private static final String BODY_ANIMATION_LEFT_URL = "./resources/left%d.png";
 	private static final String BODY_ANIMATION_RIGHT_URL = "./resources/right%d.png";
 	private static final String BODY_ANIMATION_BACK_URL = "./resources/back%d.png";
 	private static final String FACE_ANIMATION_URL = "./resources/face%d.png";
-	
+
 	// Room constants
 	private static final String BACKGROUND_URL = "./resources/background.png";
 	private static final String RIGHT_DOOR_URL = "./resources/rightDoor.png";
@@ -137,6 +177,8 @@ public final class Assets {
 	private static final String UP_DOOR_OFF_URL = "./resources/upDoorOff.png";
 	private static final String BOSS_DOOR_URL = "./resources/bossDoor.png";
 	private static final String POWER_UP_URL = "./resources/icon%d.png";
+	
+	private static final String BULLET_URL = "./resources/fire%d.png";
 
 	private Assets() 
 	{/* Utility Class */}

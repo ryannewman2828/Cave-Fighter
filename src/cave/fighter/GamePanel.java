@@ -1,18 +1,15 @@
 package cave.fighter;
 
-import game.Projectile;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import cave.fighter.character.MainCharacter;
+import cave.fighter.character.Projectile;
 import cave.fighter.enemies.Enemy;
 import cave.fighter.enums.AttackStates;
 import cave.fighter.enums.GameStates;

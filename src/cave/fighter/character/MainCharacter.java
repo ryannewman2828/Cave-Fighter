@@ -1,8 +1,5 @@
 package cave.fighter.character;
 
-import game.Projectile;
-
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

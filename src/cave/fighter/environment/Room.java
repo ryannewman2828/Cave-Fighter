@@ -1,7 +1,5 @@
 package cave.fighter.environment;
 
-import game.Projectile;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,6 +8,7 @@ import java.util.ArrayList;
 
 import cave.fighter.boss.Boss;
 import cave.fighter.character.MainCharacter;
+import cave.fighter.character.Projectile;
 import cave.fighter.enemies.Enemy;
 import cave.fighter.enemies.EnemyFactory;
 import cave.fighter.utilities.Assets;
