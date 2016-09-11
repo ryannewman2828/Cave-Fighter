@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import cave.fighter.GamePanel;
 import cave.fighter.enums.GameStates;
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class Shade extends Boss {
 
@@ -15,13 +16,15 @@ public class Shade extends Boss {
 	private int delay;
 
 	public Shade() {
-		super(420, 240, 1, 500, 3, 80, 70);
+		super(Constants.BOSS_X, Constants.BOSS_Y, Constants.SHADE_SPEED,
+				Constants.SHADE_HEALTH, Constants.SHADE_DAMAGE,
+				Constants.SHADE_WIDTH, Constants.SHADE_HEIGHT);
 
 		counterSpawn = 0;
 		counter = 0;
 		index = 1;
 		moving = false;
-		
+
 		setImage(Assets.shade);
 		getBossAnimation().addFrame(getImage(), 100);
 
@@ -29,18 +32,18 @@ public class Shade extends Boss {
 			bossHitBoxes.add(new Rectangle(0, 0, 0, 0));
 		}
 
-		delay = (10 * (5 - getSpeed()) + 30);
+		delay = (Constants.DELAY_MULTIPLIER
+				* (Constants.SPEED_DEFLATER - getSpeed()) + Constants.DELAY_INCREMENT);
 	}
 
 	@Override
 	public void update() {
 		if (isSpawning()) {
 
-			// Spawning
 			spawn();
 
 			// The after spawn
-			if (getCounter() >= 120) {
+			if (getCounter() >= Constants.SHADE_SPAWN_COUNT) {
 				setSpawning(false);
 				setBossAnimation(Assets.shadeAnim);
 				GamePanel.gameState = GameStates.BOSS_BATTLE;
@@ -51,9 +54,8 @@ public class Shade extends Boss {
 				GamePanel.gameState = GameStates.GAME_OVER;
 			}
 
-			// spawn Tentacle
 			setSpawnEnemy(false);
-			if (counterSpawn % 180 == 0){
+			if (counterSpawn % Constants.SHADE_SPAWNER_COUNT == 0) {
 				setSpawnEnemy(true);
 			}
 
@@ -62,9 +64,10 @@ public class Shade extends Boss {
 			if (moving) {
 				switch (index) {
 				case 0:
-					if (counter <= delay + 20) {
+					if (counter <= delay + Constants.BOSS_DELAY_INCREMENT) {
 						setX(getX() - getSpeed());
-					} else if (counter <= 40 + delay * 2) {
+					} else if (counter <= Constants.SECONDARY_DELAY_INCREMENT
+							+ delay * 2) {
 						setX(getX() + getSpeed());
 					} else {
 						moving = false;
@@ -72,9 +75,10 @@ public class Shade extends Boss {
 					}
 					break;
 				case 1:
-					if (counter <= delay + 20) {
+					if (counter <= delay + Constants.BOSS_DELAY_INCREMENT) {
 						setX(getX() + getSpeed());
-					} else if (counter <= 40 + delay * 2) {
+					} else if (counter <= Constants.SECONDARY_DELAY_INCREMENT
+							+ delay * 2) {
 						setX(getX() - getSpeed());
 					} else {
 						moving = false;
@@ -107,15 +111,27 @@ public class Shade extends Boss {
 
 				if (counter == delay) {
 					moving = true;
-					index = (int) (Math.random() * 4);
+					index = (int) (Math.random() * Constants.SHADE_MOVE_POSSIBILITIES);
 					counter = 0;
 				}
 			}
 
-			bossHitBoxes.get(0).setRect(getX() - 6, getY() - 33, 14, 65);
-			bossHitBoxes.get(1).setRect(getX() + 8, getY() - 13, 12, 45);
-			bossHitBoxes.get(2).setRect(getX() - 24, getY() + 26, 62, 6);
-			bossHitBoxes.get(3).setRect(getX() - 40, getY() - 22, 28, 15);
+			bossHitBoxes.get(0).setRect(
+					getX() + Constants.SHADE_HITBOX_X_DISPLACE_1,
+					getY() + Constants.SHADE_HITBOX_Y_DISPLACE_1,
+					Constants.SHADE_WIDTH_1, Constants.MAGE_HEIGHT_1);
+			bossHitBoxes.get(1).setRect(
+					getX() + Constants.SHADE_HITBOX_X_DISPLACE_2,
+					getY() + Constants.SHADE_HITBOX_Y_DISPLACE_2,
+					Constants.SHADE_WIDTH_2, Constants.MAGE_HEIGHT_2);
+			bossHitBoxes.get(2).setRect(
+					getX() + Constants.SHADE_HITBOX_X_DISPLACE_3,
+					getY() + Constants.SHADE_HITBOX_Y_DISPLACE_3,
+					Constants.SHADE_WIDTH_3, Constants.MAGE_HEIGHT_3);
+			bossHitBoxes.get(3).setRect(
+					getX() + Constants.SHADE_HITBOX_X_DISPLACE_4,
+					getY() + Constants.SHADE_HITBOX_Y_DISPLACE_4,
+					Constants.MAGE_WIDTH_4, Constants.MAGE_HEIGHT_4);
 			counter++;
 		}
 	}
@@ -126,7 +142,7 @@ public class Shade extends Boss {
 		setCounter(getCounter() + 1);
 		getHpBar().incrementBar();
 
-		if (getCounter() == 40) {
+		if (getCounter() == Constants.SHADE_START_SPAWN_COUNT) {
 			setBossAnimation(Assets.shadeSpawn);
 		}
 	}
