@@ -12,7 +12,6 @@ public class BossRoom extends Room {
 
 		super(difficulty, true);
 
-		//Indicates that this is the boss room
 		setBossRoom(true);
 
 		switch (difficulty) {

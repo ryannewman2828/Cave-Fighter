@@ -4,10 +4,10 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import cave.fighter.animation.framework.Animation;
 import cave.fighter.enums.AttackStates;
 import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
-import animation.framework.Animation;
 
 public class MainCharacter {
 

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import animation.framework.Animation;
+import cave.fighter.animation.framework.Animation;
 
 public final class Assets {
 
@@ -23,6 +23,11 @@ public final class Assets {
 		blueSlimeAnim = new Animation();
 		redSlimeAnim = new Animation();
 		yellowSlimeAnim = new Animation();
+		mageBossAnim = new Animation();
+		archMageBossAnim = new Animation();
+		shadeAnim = new Animation();
+		shadeSpawn = new Animation();
+		shadeHide = new Animation();
 
 		for (int i = 0; i < 4; i++) {
 			bodyAnimation[i] = new Animation();
@@ -95,36 +100,97 @@ public final class Assets {
 
 			// Projectile image setup
 			for (int i = 0; i < 4; i++) {
-				bulletAnimation[0].addFrame(ImageIO.read(new File(String.format(BULLET_URL, i))), 100);
-				image  = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				bulletAnimation[0].addFrame(
+						ImageIO.read(new File(String.format(BULLET_URL, i))),
+						100);
+				image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
 				g2d = (Graphics2D) image.getGraphics();
-				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(Math.PI, 16, 16), null);
+				g2d.drawImage(
+						ImageIO.read(new File(String.format(BULLET_URL, i))),
+						AffineTransform.getRotateInstance(Math.PI, 16, 16),
+						null);
 				bulletAnimation[1].addFrame(image, 100);
-				image  = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
 				g2d = (Graphics2D) image.getGraphics();
-				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(Math.PI / 2, 16, 16), null);
+				g2d.drawImage(
+						ImageIO.read(new File(String.format(BULLET_URL, i))),
+						AffineTransform.getRotateInstance(Math.PI / 2, 16, 16),
+						null);
 				bulletAnimation[2].addFrame(image, 100);
-				image  = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
 				g2d = (Graphics2D) image.getGraphics();
-				g2d.drawImage(ImageIO.read(new File(String.format(BULLET_URL, i))), AffineTransform.getRotateInstance(3 * Math.PI / 2, 16, 16), null);
+				g2d.drawImage(ImageIO.read(new File(String
+						.format(BULLET_URL, i))), AffineTransform
+						.getRotateInstance(3 * Math.PI / 2, 16, 16), null);
 				bulletAnimation[3].addFrame(image, 100);
 			}
-			
+
 			// Enemy image setup
 			for (int i = 0; i < 3; i++) {
-				greenSlimeAnim.addFrame(ImageIO.read(new File(String.format(GREEN_SLIME_URL, i))), 100);
-				blueSlimeAnim.addFrame(ImageIO.read(new File(String.format(BLUE_SLIME_URL, i))), 100);
-				redSlimeAnim.addFrame(ImageIO.read(new File(String.format(RED_SLIME_URL, i))), 100);
-				yellowSlimeAnim.addFrame(ImageIO.read(new File(String.format(YELLOW_SLIME_URL, i))), 100);
+				greenSlimeAnim.addFrame(ImageIO.read(new File(String.format(
+						GREEN_SLIME_URL, i))), 100);
+				blueSlimeAnim.addFrame(ImageIO.read(new File(String.format(
+						BLUE_SLIME_URL, i))), 100);
+				redSlimeAnim
+						.addFrame(ImageIO.read(new File(String.format(
+								RED_SLIME_URL, i))), 100);
+				yellowSlimeAnim.addFrame(ImageIO.read(new File(String.format(
+						YELLOW_SLIME_URL, i))), 100);
 			}
-			greenSlimeAnim.addFrame(ImageIO.read(new File(String.format(GREEN_SLIME_URL, 1))), 100);
-			greenSlime = ImageIO.read(new File(String.format(GREEN_SLIME_URL, 0)));
-			blueSlimeAnim.addFrame(ImageIO.read(new File(String.format(BLUE_SLIME_URL, 1))), 100);
-			blueSlime = ImageIO.read(new File(String.format(BLUE_SLIME_URL, 0)));
-			redSlimeAnim.addFrame(ImageIO.read(new File(String.format(RED_SLIME_URL, 1))), 100);
+			greenSlimeAnim.addFrame(
+					ImageIO.read(new File(String.format(GREEN_SLIME_URL, 1))),
+					100);
+			greenSlime = ImageIO.read(new File(String
+					.format(GREEN_SLIME_URL, 0)));
+			blueSlimeAnim.addFrame(
+					ImageIO.read(new File(String.format(BLUE_SLIME_URL, 1))),
+					100);
+			blueSlime = ImageIO
+					.read(new File(String.format(BLUE_SLIME_URL, 0)));
+			redSlimeAnim.addFrame(
+					ImageIO.read(new File(String.format(RED_SLIME_URL, 1))),
+					100);
 			redSlime = ImageIO.read(new File(String.format(RED_SLIME_URL, 0)));
-			yellowSlimeAnim.addFrame(ImageIO.read(new File(String.format(YELLOW_SLIME_URL, 1))), 100);
-			yellowSlime = ImageIO.read(new File(String.format(YELLOW_SLIME_URL, 0)));
+			yellowSlimeAnim.addFrame(
+					ImageIO.read(new File(String.format(YELLOW_SLIME_URL, 1))),
+					100);
+			yellowSlime = ImageIO.read(new File(String.format(YELLOW_SLIME_URL,
+					0)));
+
+			// Boss image setup
+			for (int i = 0; i < 8; i++) {
+				mageBossAnim
+						.addFrame(ImageIO.read(new File(String.format(
+								MAGE_BOSS_URL, i))), 100);
+			}
+			for (int i = 6; i >= 0; i--) {
+				mageBossAnim
+						.addFrame(ImageIO.read(new File(String.format(
+								MAGE_BOSS_URL, i))), 100);
+			}
+			mageBoss = ImageIO.read(new File(String.format(MAGE_BOSS_URL, 0)));
+			mageBossAnim.addFrame(mageBoss, 100);
+			for (int i = 0; i < 8; i++) {
+				archMageBossAnim.addFrame(ImageIO.read(new File(String.format(ARCH_MAGE_BOSS_URL, i))), 100);
+			}
+			for (int i = 6; i >= 0; i--) {
+				archMageBossAnim.addFrame(ImageIO.read(new File(String.format(ARCH_MAGE_BOSS_URL, i))), 100);
+			}
+			archMageBoss = ImageIO.read(new File(String.format(ARCH_MAGE_BOSS_URL, 0)));
+			archMageBossAnim.addFrame(archMageBoss, 100);
+			for (int i = 0; i < 4; i++) {
+				shadeAnim.addFrame(ImageIO.read(new File(String.format(SHADE_BOSS_URL, i))), 100);
+			}
+			for (int i = 2; i >= 0; i--) {
+				shadeAnim.addFrame(ImageIO.read(new File(String.format(SHADE_BOSS_URL, i))), 100);
+			}
+			for (int i = 0; i < 10; i++) {
+				shadeSpawn.addFrame(ImageIO.read(new File(String.format(SHADE_SPAWN_URL, i))), 100);
+			}
+			for (int i = 9; i >= 0; i--) {
+				shadeHide.addFrame(ImageIO.read(new File(String.format(SHADE_SPAWN_URL, i))), 100);
+			}
+			shade = ImageIO.read(new File(String.format(SHADE_SPAWN_URL, 0)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -161,7 +227,7 @@ public final class Assets {
 	public static BufferedImage[] powerUp;
 
 	public static Animation[] bulletAnimation;
-	
+
 	public static BufferedImage greenSlime;
 	public static Animation greenSlimeAnim;
 	public static BufferedImage blueSlime;
@@ -171,9 +237,18 @@ public final class Assets {
 	public static BufferedImage yellowSlime;
 	public static Animation yellowSlimeAnim;
 
+	public static BufferedImage mageBoss;
+	public static Animation mageBossAnim;
+	public static BufferedImage archMageBoss;
+	public static Animation archMageBossAnim;
+	public static BufferedImage shade;
+	public static Animation shadeAnim;
+	public static Animation shadeSpawn;
+	public static Animation shadeHide;
+
 	private static Graphics2D g2d;
 	private static BufferedImage image;
-	
+
 	// Menu constants
 	private static final String MENU_URL = "./resources/menu1.png";
 	private static final String SELECTION_URL = "./resources/menu2.png";
@@ -205,14 +280,23 @@ public final class Assets {
 	private static final String UP_DOOR_OFF_URL = "./resources/upDoorOff.png";
 	private static final String BOSS_DOOR_URL = "./resources/bossDoor.png";
 	private static final String POWER_UP_URL = "./resources/icon%d.png";
-	
+
+	// Bullets constants
 	private static final String BULLET_URL = "./resources/fire%d.png";
-	
+
+	// Enemy constants
 	private static final String GREEN_SLIME_URL = "./resources/slime%d.png";
 	private static final String BLUE_SLIME_URL = "./resources/bslime%d.png";
 	private static final String RED_SLIME_URL = "./resources/rslime%d.png";
 	private static final String YELLOW_SLIME_URL = "./resources/yslime%d.png";
+	private static final String TENTACLE_URL = "./resources/tentacle%d.png";
+	private static final String TENTACLE_ENTRANCE_URL = "./resources/tentacle%d.png";
 
+	// Boss constants
+	private static final String MAGE_BOSS_URL = "./resources/mage%d.png";
+	private static final String ARCH_MAGE_BOSS_URL = "./resources/amage%d.png";
+	private static final String SHADE_BOSS_URL = "./resources/shade%d.png";
+	private static final String SHADE_SPAWN_URL = "./resources/spawn%d.png";
 
 	private Assets() 
 	{/* Utility Class */}

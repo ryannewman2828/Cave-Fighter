@@ -202,8 +202,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			}
 
 			if (map.getActiveRoom().isBossRoom()) {
-				// TODO uncomment this line
-				// map.getActiveRoom().getBoss().getBossAnimation().update(10);
+				map.getActiveRoom().getBoss().getBossAnimation().update(10);
 			}
 
 			ArrayList<Enemy> enemies = map.getActiveRoom().getEnemies();

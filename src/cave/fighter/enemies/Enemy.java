@@ -6,19 +6,20 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import animation.framework.Animation;
+import cave.fighter.animation.framework.Animation;
+
 
 public abstract class Enemy {
 
 	private int speed;
-	private boolean alive = true;
+	private boolean alive;
 	private boolean spawning;
 	private int x;
 	private int y;
 	private int health;
 	private int damage;
-	private float alpha = .01f;
-	private int counter = 0;
+	private float alpha;
+	private int counter;
 	private Animation enemyAnimation;
 	private Image image;
 	private Image canvasImage;
@@ -35,6 +36,9 @@ public abstract class Enemy {
 		canvasImage = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
 		enemyAnimation = new Animation();
 		enemyHitBox = new Rectangle(0,0,0,0);
+		alive = true;
+		alpha = .01f;
+		counter = 0;
 	}
 	
 	public abstract void update();

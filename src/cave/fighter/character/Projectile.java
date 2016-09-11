@@ -2,8 +2,8 @@ package cave.fighter.character;
 
 import java.awt.Rectangle;
 
+import cave.fighter.animation.framework.Animation;
 import cave.fighter.utilities.Assets;
-import animation.framework.Animation;
 
 public class Projectile {
 

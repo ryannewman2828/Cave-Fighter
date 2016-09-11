@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import cave.fighter.boss.Boss;
+import cave.fighter.boss.Shade;
 import cave.fighter.character.MainCharacter;
 import cave.fighter.character.Projectile;
 import cave.fighter.enemies.Enemy;
@@ -98,7 +99,11 @@ public class Room {
 		if (bossRoom) {
 			boss.update();
 			if (boss.isSpawnEnemy()) {
-				enemies.add(EnemyFactory.spawnEnemy(difficulty));
+				if(boss instanceof Shade){
+					enemies.add(EnemyFactory.spawnTentacle());
+				} else {
+					enemies.add(EnemyFactory.spawnEnemy(difficulty));
+				}
 			}
 		}
 
