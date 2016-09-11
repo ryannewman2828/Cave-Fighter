@@ -193,7 +193,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 				MainCharacter.getCharacterInstance().getHeadAnimation()
 						.update(10);
 			}
-
+			
 			ArrayList<Projectile> projectiles = MainCharacter
 					.getCharacterInstance().getProjectiles();
 			for (int i = 0; i < projectiles.size(); i++) {

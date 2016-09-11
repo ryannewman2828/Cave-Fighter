@@ -23,6 +23,8 @@ public final class Assets {
 		blueSlimeAnim = new Animation();
 		redSlimeAnim = new Animation();
 		yellowSlimeAnim = new Animation();
+		tentacle = new Animation();
+		tentacleEntrance = new Animation();
 		mageBossAnim = new Animation();
 		archMageBossAnim = new Animation();
 		shadeAnim = new Animation();
@@ -156,6 +158,12 @@ public final class Assets {
 					100);
 			yellowSlime = ImageIO.read(new File(String.format(YELLOW_SLIME_URL,
 					0)));
+			for (int i = 0; i < 8; i++) {
+				tentacle.addFrame(ImageIO.read(new File(String.format(TENTACLE_URL, i))), 100);
+			}
+			for (int i = 0; i < 12; i++) {
+				tentacleEntrance.addFrame(ImageIO.read(new File(String.format(TENTACLE_ENTRANCE_URL, i))), 100);
+			}
 
 			// Boss image setup
 			for (int i = 0; i < 8; i++) {
@@ -236,6 +244,8 @@ public final class Assets {
 	public static Animation redSlimeAnim;
 	public static BufferedImage yellowSlime;
 	public static Animation yellowSlimeAnim;
+	public static Animation tentacle;
+	public static Animation tentacleEntrance;
 
 	public static BufferedImage mageBoss;
 	public static Animation mageBossAnim;
@@ -290,7 +300,7 @@ public final class Assets {
 	private static final String RED_SLIME_URL = "./resources/rslime%d.png";
 	private static final String YELLOW_SLIME_URL = "./resources/yslime%d.png";
 	private static final String TENTACLE_URL = "./resources/tentacle%d.png";
-	private static final String TENTACLE_ENTRANCE_URL = "./resources/tentacle%d.png";
+	private static final String TENTACLE_ENTRANCE_URL = "./resources/te%d.png";
 
 	// Boss constants
 	private static final String MAGE_BOSS_URL = "./resources/mage%d.png";
