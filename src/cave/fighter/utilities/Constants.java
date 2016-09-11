@@ -63,6 +63,8 @@ public final class Constants {
 	public static final int MAP_ROOM_X_START_RIGHT = 740;
 	
 	public static final int NUM_ENEMY_TYPE = 4;
+	public static final int ENEMY_SPAWN_X = 400;
+	public static final int ENEMY_SPAWN_Y = 140;
 	
 	public static final int BOSS_X = 420;
 	public static final int BOSS_Y = 240;

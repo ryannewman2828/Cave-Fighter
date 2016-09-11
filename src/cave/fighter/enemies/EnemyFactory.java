@@ -3,7 +3,9 @@ package cave.fighter.enemies;
 
 import java.util.ArrayList;
 
+import cave.fighter.animation.framework.Animation;
 import cave.fighter.character.MainCharacter;
+import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
 
 public class EnemyFactory {
@@ -90,34 +92,50 @@ public class EnemyFactory {
 
 		// randomizes enemy indexes
 		int rand = (int) (Math.random() * Constants.NUM_ENEMY_TYPE);
-
-		switch (rand) {
-
+		Animation anim = new Animation();
+		switch (rand) {		
+		
 		// Spawns green slime
 		case 0:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3;
 			damage = difficulty;
-			return (new GreenSlime(400, 140, speed, health, damage));
+			GreenSlime gs = new GreenSlime(Constants.ENEMY_SPAWN_X, Constants.ENEMY_SPAWN_Y, speed, health, damage);
+			gs.setSpawning(true);
+			anim.addFrame(Assets.greenSlime, 100);
+			gs.setEnemyAnimation(anim);
+			return gs;
 		// Spawns blue slime
 		case 1:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3;
 			damage = difficulty + 2;
-			return (new BlueSlime(400, 140, speed, health, damage));
+			BlueSlime bs = new BlueSlime(Constants.ENEMY_SPAWN_X, Constants.ENEMY_SPAWN_Y, speed, health, damage);
+			bs.setSpawning(true);
+			anim.addFrame(Assets.blueSlime, 100);
+			bs.setEnemyAnimation(anim);
+			return bs;
 		// Spawns yellow slime
 		case 2:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3;
 			damage = difficulty;
-			return (new YellowSlime(400, 140, speed, health, damage));
+			YellowSlime ys = new YellowSlime(Constants.ENEMY_SPAWN_X, Constants.ENEMY_SPAWN_Y, speed, health, damage);
+			ys.setSpawning(true);
+			anim.addFrame(Assets.yellowSlime, 100);
+			ys.setEnemyAnimation(anim);
+			return ys;
 		// Spawns red slime
 		case 3:
 			speed = 1;
 			health = (int) (Math.random() * difficulty * 2) + difficulty * 3
 					+ 2;
 			damage = difficulty + 1;
-			return (new RedSlime(400, 140, speed, health, damage));
+			RedSlime rs = new RedSlime(Constants.ENEMY_SPAWN_X, Constants.ENEMY_SPAWN_Y, speed, health, damage);
+			rs.setSpawning(true);
+			anim.addFrame(Assets.redSlime, 100);
+			rs.setEnemyAnimation(anim);
+			return rs;
 		}
 		return null;
 	}
