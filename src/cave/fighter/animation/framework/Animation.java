@@ -1,13 +1,12 @@
 /**
  * This code was taken from: http://www.kilobolt.com/game-development-tutorial.html
  * I have edited this code slightly for functionality purposes only
- * Nothing major enough to be graded on
  */
 package cave.fighter.animation.framework;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Animation {
 
@@ -60,6 +59,14 @@ public class Animation {
 		}
 	}
 
+	public synchronized Animation clone(){
+		Animation anim = new Animation();
+	    for (int i = 0; i < frames.size(); i++) {
+			anim.addFrame(frames.get(i).image, 100);
+		}
+	    return anim;
+	}
+	
 	private AnimFrame getFrame(int i) {
 		return (AnimFrame) frames.get(i);
 	}

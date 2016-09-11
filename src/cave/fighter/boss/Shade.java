@@ -45,7 +45,7 @@ public class Shade extends Boss {
 			// The after spawn
 			if (getCounter() >= Constants.SHADE_SPAWN_COUNT) {
 				setSpawning(false);
-				setBossAnimation(Assets.shadeAnim);
+				setBossAnimation(Assets.shadeAnim.clone());
 				GamePanel.gameState = GameStates.BOSS_BATTLE;
 			}
 		} else {

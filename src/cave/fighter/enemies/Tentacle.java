@@ -8,7 +8,7 @@ public class Tentacle extends Enemy {
 		super(x, y, speed, health, damage);
 
 		setSpawning(true);
-		setEnemyAnimation(Assets.tentacleEntrance);
+		setEnemyAnimation(Assets.tentacleEntrance.clone());
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class Tentacle extends Enemy {
 			
 			if (getCounter() >= 80) {
 				setSpawning(false);
-				setEnemyAnimation(Assets.tentacle);
+				setEnemyAnimation(Assets.tentacle.clone());
 			}
 		} else {
 

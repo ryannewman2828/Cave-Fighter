@@ -40,7 +40,7 @@ public class MageBoss extends Boss {
 			// The after spawn
 			if (getCounter() >= Constants.MAGE_SPAWN_COUNT) {
 				setSpawning(false);
-				setBossAnimation(Assets.mageBossAnim);
+				setBossAnimation(Assets.mageBossAnim.clone());
 				GamePanel.gameState = GameStates.BOSS_BATTLE;
 			}
 		} else {

@@ -11,7 +11,7 @@ public class YellowSlime extends Enemy {
 	public YellowSlime(int x, int y, int speed, int health, int damage) {
 		super(x, y, speed, health, damage);
 		
-		setEnemyAnimation(Assets.yellowSlimeAnim);
+		setEnemyAnimation(Assets.yellowSlimeAnim.clone());
 		setImage(Assets.yellowSlime);
 	}
 
@@ -25,7 +25,7 @@ public class YellowSlime extends Enemy {
 			//The after spawn
 			if (getCounter() >= 120) {
 				setSpawning(false);
-				setEnemyAnimation(Assets.yellowSlimeAnim);
+				setEnemyAnimation(Assets.yellowSlimeAnim.clone());
 			}
 			
 		} else {

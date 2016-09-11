@@ -40,7 +40,7 @@ public class ArchMageBoss extends Boss {
 			// The after spawn
 			if (getCounter() >= Constants.ARCH_MAGE_SPAWN_COUNT) {
 				setSpawning(false);
-				setBossAnimation(Assets.archMageBossAnim);
+				setBossAnimation(Assets.archMageBossAnim.clone());
 				GamePanel.gameState = GameStates.BOSS_BATTLE;
 			}
 		} else {

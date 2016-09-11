@@ -13,8 +13,8 @@ public class Projectile {
 	private int speedY;
 	private int height;
 	private int width;
-	int animIndex;
 	private boolean active;
+	private Animation anim;
 
 	public Rectangle bulletHitBox = new Rectangle(0, 0, 0, 0);
 
@@ -28,19 +28,19 @@ public class Projectile {
 		if (speedY < 0) {
 			width = 16;
 			height = 32;
-			animIndex = 1;
+			anim = Assets.bulletAnimation[1].clone();
 		} else if (speedX < 0) {
 			width = 32;
 			height = 16;
-			animIndex = 2;
+			anim = Assets.bulletAnimation[2].clone();
 		} else if (speedX > 0) {
 			width = 32;
 			height = 16;
-			animIndex = 3;
+			anim = Assets.bulletAnimation[3].clone();
 		} else {
 			width = 16;
 			height = 32;
-			animIndex = 0;
+			anim = Assets.bulletAnimation[0].clone();
 		}
 
 	}
@@ -98,6 +98,6 @@ public class Projectile {
 	}
 
 	public Animation getBulletAnimation() {
-		return Assets.bulletAnimation[animIndex];
+		return anim;
 	}
 }

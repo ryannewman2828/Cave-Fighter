@@ -7,7 +7,7 @@ public class BlueSlime extends Enemy {
 	public BlueSlime(int x, int y, int speed, int health, int damage) {
 		super(x, y, speed, health, damage);
 		
-		setEnemyAnimation(Assets.blueSlimeAnim);
+		setEnemyAnimation(Assets.blueSlimeAnim.clone());
 		setImage(Assets.blueSlime);
 	}
 
@@ -21,7 +21,7 @@ public class BlueSlime extends Enemy {
 			//The after spawn
 			if (getCounter() >= 120) {
 				setSpawning(false);
-				setEnemyAnimation(Assets.blueSlimeAnim);
+				setEnemyAnimation(Assets.blueSlimeAnim.clone());
 			}
 		} else {
 

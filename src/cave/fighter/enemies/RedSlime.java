@@ -13,7 +13,7 @@ public class RedSlime extends Enemy {
 	public RedSlime(int x, int y, int speed, int health, int damage) {
 		super(x, y, speed, health, damage);
 		
-		setEnemyAnimation(Assets.redSlimeAnim);
+		setEnemyAnimation(Assets.redSlimeAnim.clone());
 		setImage(Assets.redSlime);
 	}
 
@@ -27,7 +27,7 @@ public class RedSlime extends Enemy {
 			//The after spawn
 			if (getCounter() >= 120) {
 				setSpawning(false);
-				setEnemyAnimation(Assets.redSlimeAnim);
+				setEnemyAnimation(Assets.redSlimeAnim.clone());
 			}
 		} else {
 

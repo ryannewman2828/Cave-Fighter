@@ -13,7 +13,7 @@ public class GreenSlime extends Enemy {
 	public GreenSlime(int x, int y, int speed, int health, int damage) {
 		super(x, y, speed, health, damage);
 
-		setEnemyAnimation(Assets.greenSlimeAnim);
+		setEnemyAnimation(Assets.greenSlimeAnim.clone());
 		setImage(Assets.greenSlime);
 	}
 
@@ -27,7 +27,7 @@ public class GreenSlime extends Enemy {
 			//The after spawn
 			if (getCounter() >= 120) {
 				setSpawning(false);
-				setEnemyAnimation(Assets.greenSlimeAnim);
+				setEnemyAnimation(Assets.greenSlimeAnim.clone());
 			}
 		} else {
 			if (getHealth() <= 0) {
