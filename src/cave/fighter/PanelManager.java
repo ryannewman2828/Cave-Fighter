@@ -28,7 +28,6 @@ public class PanelManager {
 		jFrame.setContentPane(curPanel);
 	}	
 	
-	// TODO make this more extendable later
 	public void switchPanel(){
 		if(curPanel == menuPanel){
 			gamePanel.setSize(curPanel.getMapSize());

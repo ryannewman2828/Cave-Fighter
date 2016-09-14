@@ -1,6 +1,7 @@
 package cave.fighter.enemies;
 
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class BlueSlime extends Enemy {
 
@@ -15,11 +16,10 @@ public class BlueSlime extends Enemy {
 	public void update() {
 		if (isSpawning()) {
 
-			//Spawns
 			fade();
 
 			//The after spawn
-			if (getCounter() >= 120) {
+			if (getCounter() >= Constants.ENEMY_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.blueSlimeAnim.clone());
 			}

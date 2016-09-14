@@ -141,9 +141,9 @@ public class EnemyFactory {
 	}
 
 	public static Enemy spawnTentacle() {
-		int speed = 0;
-		int health = 7;
-		int damage = 2;
+		int speed = Constants.TENTACLE_SPEED;
+		int health = Constants.TENTACLE_HEALTH;
+		int damage = Constants.TENTACLE_DAMAGE;
 		return (new Tentacle(MainCharacter.getCharacterInstance().getX(), MainCharacter.getCharacterInstance().getY(), speed, health, damage));
 	}
 

@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 
 import cave.fighter.animation.framework.Animation;
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class Projectile {
 
@@ -26,20 +27,20 @@ public class Projectile {
 		active = true;
 
 		if (speedY < 0) {
-			width = 16;
-			height = 32;
+			width = Constants.BULLET_HALF_SIZE;
+			height = Constants.BULLET_FULL_SIZE;
 			anim = Assets.bulletAnimation[1].clone();
 		} else if (speedX < 0) {
-			width = 32;
-			height = 16;
+			width = Constants.BULLET_FULL_SIZE;
+			height = Constants.BULLET_HALF_SIZE;
 			anim = Assets.bulletAnimation[2].clone();
 		} else if (speedX > 0) {
-			width = 32;
-			height = 16;
+			width = Constants.BULLET_FULL_SIZE;
+			height = Constants.BULLET_HALF_SIZE;
 			anim = Assets.bulletAnimation[3].clone();
 		} else {
-			width = 16;
-			height = 32;
+			width = Constants.BULLET_HALF_SIZE;
+			height = Constants.BULLET_FULL_SIZE;
 			anim = Assets.bulletAnimation[0].clone();
 		}
 
@@ -52,7 +53,7 @@ public class Projectile {
 
 		bulletHitBox.setRect(x - width / 2, y - height / 2, width, height);
 
-		if (x <= 10 || x >= 780 || y <= 80 || y >= 460) {
+		if (x <= Constants.MAP_LEFT_BOUND || x >= Constants.MAP_RIGHT_BOUND || y <= Constants.MAP_TOP_BOUND || y >= Constants.MAP_BOTTOM_BOUND) {
 			active = false;
 		}
 	}

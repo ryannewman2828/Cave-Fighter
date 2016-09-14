@@ -254,7 +254,7 @@ public class MainCharacter {
 
 	public void decreaseFireRate() {
 		if (fireRate > Constants.CHAR_MAX_FIRE_RATE) {
-			fireRate -= 5;
+			fireRate -= Constants.CHAR_DECREASE_FIRE_RATE;
 		}
 	}
 

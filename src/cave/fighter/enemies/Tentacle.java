@@ -1,6 +1,7 @@
 package cave.fighter.enemies;
 
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class Tentacle extends Enemy {
 	
@@ -17,7 +18,7 @@ public class Tentacle extends Enemy {
 
 			setCounter(getCounter() + 1);
 			
-			if (getCounter() >= 80) {
+			if (getCounter() >= Constants.TENTACLE_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.tentacle.clone());
 			}

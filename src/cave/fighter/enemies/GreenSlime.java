@@ -2,6 +2,7 @@ package cave.fighter.enemies;
 
 import cave.fighter.character.MainCharacter;
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class GreenSlime extends Enemy {
 
@@ -25,7 +26,7 @@ public class GreenSlime extends Enemy {
 			fade();
 
 			//The after spawn
-			if (getCounter() >= 120) {
+			if (getCounter() >= Constants.ENEMY_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.greenSlimeAnim.clone());
 			}

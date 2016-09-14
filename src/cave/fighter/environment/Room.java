@@ -14,6 +14,7 @@ import cave.fighter.character.Projectile;
 import cave.fighter.enemies.Enemy;
 import cave.fighter.enemies.EnemyFactory;
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class Room {
 
@@ -55,7 +56,6 @@ public class Room {
 	public Room(int difficulty) {
 		this();
 		enemies = EnemyFactory.getEnemyList(difficulty);
-		// redrawRoom();
 	}
 
 	// Constructor for the starting room
@@ -91,7 +91,6 @@ public class Room {
 	public Room(int difficulty, boolean spawning) {
 		this();
 		this.difficulty = difficulty;
-		// redrawRoom();
 	}
 
 	public void update() {
@@ -193,7 +192,7 @@ public class Room {
 				if (enemies.isEmpty()) {
 					setRoomCleared(true);
 					if (!isBossRoom()) {
-						powerUpHitBox.setRect(400, 240, 40, 40);
+						powerUpHitBox.setRect(Constants.POWERUP_X, Constants.POWERUP_Y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE);
 						powerUpID = (int) (Math.random() * 8);
 					}
 				}

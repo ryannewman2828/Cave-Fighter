@@ -16,25 +16,36 @@ import cave.fighter.enums.GameStates;
 import cave.fighter.enums.MoveStates;
 import cave.fighter.environment.Map;
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class GamePanel extends CaveFighterPanel implements KeyListener {
 
-	private boolean wPressed = false;
-	private boolean sPressed = false;
-	private boolean aPressed = false;
-	private boolean dPressed = false;
-	private boolean upPressed = false;
-	private boolean downPressed = false;
-	private boolean leftPressed = false;
-	private boolean rightPressed = false;
+	private boolean wPressed;
+	private boolean sPressed;
+	private boolean aPressed;
+	private boolean dPressed;
+	private boolean upPressed;
+	private boolean downPressed;
+	private boolean leftPressed;
+	private boolean rightPressed;
 
-	private int counter = 0;
+	private int counter;
 
 	private Map map;
 
 	public static GameStates gameState = GameStates.RUNNING;
 
 	public GamePanel() throws IOException {
+		
+		counter = 0;
+		wPressed = false;
+		sPressed = false;
+		aPressed = false;
+		dPressed = false;
+		upPressed = false;
+		downPressed = false;
+		leftPressed = false;
+		rightPressed = false;
 		
 		setSwitchPanel(false);
 
@@ -68,7 +79,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 										.getHeight(getParent()) / 2, this);
 			}
 
-			g2d.drawImage(map.getActiveRoom().getPowerUp(), 400, 240, this);
+			g2d.drawImage(map.getActiveRoom().getPowerUp(), Constants.POWERUP_X, Constants.POWERUP_Y, this);
 			g2d.drawImage(Assets.walls, 0, 0, this);
 			break;
 		case BOSS_SPAWN:
@@ -100,12 +111,12 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			g2d.drawImage(Assets.walls, 0, 0, this);
 
 			g2d.setColor(Color.BLACK);
-			g2d.fillRect(495, 40, 210, 30);
+			g2d.fillRect(Constants.BAR_OUTSIDE_X, Constants.BAR_OUTSIDE_Y, Constants.BAR_WIDTH + Constants.BAR_DISPLACE, Constants.BAR_HEIGHT + Constants.BAR_DISPLACE);
 			g2d.setColor(Color.RED);
-			g2d.fillRect(500, 45, 200, 20);
+			g2d.fillRect(Constants.BAR_INSIDE_X, Constants.BAR_INSIDE_Y, Constants.BAR_WIDTH, Constants.BAR_HEIGHT);
 			g2d.setColor(Color.GREEN);
-			g2d.fillRect(500, 45, map.getActiveRoom().getBoss().getHpBar()
-					.getSize(), 20);
+			g2d.fillRect(Constants.BAR_INSIDE_X, Constants.BAR_INSIDE_Y, map.getActiveRoom().getBoss().getHpBar()
+					.getSize(), Constants.BAR_HEIGHT);
 			break;
 		case DEAD:
 
@@ -152,19 +163,19 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			if (upPressed
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.UP;
-				MainCharacter.getCharacterInstance().setHeadCounter(15);
+				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
 			} else if (leftPressed
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.LEFT;
-				MainCharacter.getCharacterInstance().setHeadCounter(15);
+				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
 			} else if (rightPressed
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.RIGHT;
-				MainCharacter.getCharacterInstance().setHeadCounter(15);
+				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
 			} else if (downPressed
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.DOWN;
-				MainCharacter.getCharacterInstance().setHeadCounter(15);
+				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
 			}
 			break;
 		case DEAD:
@@ -189,25 +200,25 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 			if (map.move != MoveStates.STATIC) {
 				MainCharacter.getCharacterInstance().getBodyAnimation()
-						.update(10);
+						.update(Constants.CHAR_ANIMATION);
 				MainCharacter.getCharacterInstance().getHeadAnimation()
-						.update(10);
+						.update(Constants.CHAR_ANIMATION);
 			}
 			
 			ArrayList<Projectile> projectiles = MainCharacter
 					.getCharacterInstance().getProjectiles();
 			for (int i = 0; i < projectiles.size(); i++) {
 				Projectile p = (Projectile) projectiles.get(i);
-				p.getBulletAnimation().update(10);
+				p.getBulletAnimation().update(Constants.CHAR_ANIMATION);
 			}
 
 			if (map.getActiveRoom().isBossRoom()) {
-				map.getActiveRoom().getBoss().getBossAnimation().update(10);
+				map.getActiveRoom().getBoss().getBossAnimation().update(Constants.CHAR_ANIMATION);
 			}
 
 			ArrayList<Enemy> enemies = map.getActiveRoom().getEnemies();
 			for (int i = 0; i < enemies.size(); i++) {
-				enemies.get(i).getEnemyAnimation().update(15);
+				enemies.get(i).getEnemyAnimation().update(Constants.ENEMY_ANIMATION);
 			}
 		}
 	}
@@ -231,7 +242,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 										.getHeadImage().getWidth(getParent())
 								/ 2, MainCharacter.getCharacterInstance()
 								.getY()
-								- 12
+								- Constants.CHAR_DISPLACE
 								- MainCharacter.getCharacterInstance()
 										.getHeadImage().getHeight(getParent())
 								/ 2, this);
@@ -243,7 +254,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 										.getHeadAnimation().getImage()
 										.getWidth(getParent()) / 2,
 						MainCharacter.getCharacterInstance().getY()
-								- 12
+								- Constants.CHAR_DISPLACE
 								- MainCharacter.getCharacterInstance()
 										.getHeadAnimation().getImage()
 										.getHeight(getParent()) / 2, this);
@@ -268,7 +279,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 									.getHeadAnimation().getImage()
 									.getWidth(getParent()) / 2,
 					MainCharacter.getCharacterInstance().getY()
-							- 12
+							- Constants.CHAR_DISPLACE
 							- MainCharacter.getCharacterInstance()
 									.getHeadAnimation().getImage()
 									.getHeight(getParent()) / 2, this);
@@ -279,7 +290,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 		g.drawImage(Assets.roomImage, 0, 0, this);
 
-		ArrayList projectiles = MainCharacter.getCharacterInstance()
+		ArrayList<Projectile> projectiles = MainCharacter.getCharacterInstance()
 				.getProjectiles();
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = (Projectile) projectiles.get(i);
@@ -293,13 +304,13 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		counter = MainCharacter.getCharacterInstance().getCurHealth();
 		for (int i = 0; i < MainCharacter.getCharacterInstance().getHealth() / 2; i++) {
 			if (counter - 2 >= 0) {
-				g.drawImage(Assets.fullHeart, 60 * i + 40, 30, this);
+				g.drawImage(Assets.fullHeart, Constants.HEART_X_LOCATION_MULTIPLIER * i + Constants.HEART_DISPLACE, Constants.HEART_Y, this);
 				counter -= 2;
 			} else if (counter - 1 >= 0) {
-				g.drawImage(Assets.halfHeart, 60 * i + 40, 30, this);
+				g.drawImage(Assets.halfHeart, Constants.HEART_X_LOCATION_MULTIPLIER * i + Constants.HEART_DISPLACE, Constants.HEART_Y, this);
 				counter -= 1;
 			} else {
-				g.drawImage(Assets.emptyHeart, 60 * i + 40, 30, this);
+				g.drawImage(Assets.emptyHeart, Constants.HEART_X_LOCATION_MULTIPLIER * i + Constants.HEART_DISPLACE, Constants.HEART_Y, this);
 			}
 		}
 	}

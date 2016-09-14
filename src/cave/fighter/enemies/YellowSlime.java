@@ -2,6 +2,7 @@ package cave.fighter.enemies;
 
 import cave.fighter.character.MainCharacter;
 import cave.fighter.utilities.Assets;
+import cave.fighter.utilities.Constants;
 
 public class YellowSlime extends Enemy {
 
@@ -19,11 +20,10 @@ public class YellowSlime extends Enemy {
 	public void update() {
 		if(isSpawning()){
 			
-			//Spawning
 			fade();
 			
 			//The after spawn
-			if (getCounter() >= 120) {
+			if (getCounter() >= Constants.ENEMY_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.yellowSlimeAnim.clone());
 			}

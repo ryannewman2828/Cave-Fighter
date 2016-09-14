@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import cave.fighter.animation.framework.Animation;
+import cave.fighter.utilities.Constants;
 
 public abstract class Boss {
 
@@ -38,7 +39,7 @@ public abstract class Boss {
 		bossHitBoxes = new ArrayList<Rectangle>();
 		spawning = true;
 		counter = 0;
-		alpha = 0.04f;
+		alpha = Constants.ALPHA;
 	}
 
 	public abstract void update();

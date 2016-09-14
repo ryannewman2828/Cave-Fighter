@@ -31,6 +31,10 @@ public final class Constants {
 	
 	public static final int MOUSE_COOLDOWN = 15;
 	
+	public static final int POWERUP_X = 400;
+	public static final int POWERUP_Y = 240;
+	public static final int POWERUP_SIZE = 40;
+	
 	public static final int CHAR_MAX_HEALTH = 10;
 	public static final int CHAR_START_HEALTH = 6;
 	public static final int CHAR_MAX_SPEED = 6;
@@ -38,6 +42,7 @@ public final class Constants {
 	public static final int CHAR_START_BULLET_SPEED = 4;
 	public static final int CHAR_MAX_FIRE_RATE = 10;
 	public static final int CHAR_START_FIRE_RATE = 25;
+	public static final int CHAR_DECREASE_FIRE_RATE = 5;
 	public static final int CHAR_MAX_DAMAGE = 5;
 	public static final int CHAR_START_DAMAGE = 5; //1;
 	public static final int CHAR_START_X = 400;
@@ -52,6 +57,11 @@ public final class Constants {
 	public static final int CHAR_HITBOX_2_HEIGHT = 22;
 	public static final int CHAR_BULLET_Y_DISPLACE = 12;
 	public static final int CHAR_BULLET_COOLDOWN = 120;
+	public static final int CHAR_DISPLACE = 12;
+	public static final int CHAR_HEAD_COOLDOWN = 15;
+	public static final int CHAR_ANIMATION = 10;
+	public static final int BULLET_FULL_SIZE = 32;
+	public static final int BULLET_HALF_SIZE = 16;
 	
 	public static final int MAP_ROOM_OFFSET = 3;
 	public static final int MAP_ROOM_SMALL = 9;
@@ -61,13 +71,25 @@ public final class Constants {
 	public static final int MAP_ROOM_Y_START_BOT = 450;
 	public static final int MAP_ROOM_X_START_LEFT = 40;
 	public static final int MAP_ROOM_X_START_RIGHT = 740;
+	public static final int MAP_LEFT_BOUND = 10;
+	public static final int MAP_RIGHT_BOUND = 780;
+	public static final int MAP_TOP_BOUND = 80;
+	public static final int MAP_BOTTOM_BOUND = 460;
 	
 	public static final int NUM_ENEMY_TYPE = 4;
 	public static final int ENEMY_SPAWN_X = 400;
 	public static final int ENEMY_SPAWN_Y = 140;
+	public static final int ENEMY_ANIMATION = 15;
+	public static final int ENEMY_SPAWN_TIME = 120;
+	public static final int TENTACLE_SPAWN_TIME = 80;
+	
+	public static final int TENTACLE_SPEED = 0;
+	public static final int TENTACLE_HEALTH = 7;
+	public static final int TENTACLE_DAMAGE = 2;
 	
 	public static final int BOSS_X = 420;
 	public static final int BOSS_Y = 240;
+	public static final float ALPHA = 0.04f;
 	public static final int MAGE_SPEED = 1;
 	public static final int MAGE_HEALTH = 100;
 	public static final int MAGE_DAMAGE = 1;
@@ -145,6 +167,20 @@ public final class Constants {
 	public static final int SPEED_DEFLATER = 5;
 	public static final int MAGE_DEFLATER = 25;
 	public static final int ARCH_MAGE_DEFLATER = 50;
+	
+	public static final int HEART_X_LOCATION_MULTIPLIER = 60;
+	public static final int HEART_DISPLACE = 40;
+	public static final int HEART_Y = 30;
+	
+	public static final int BOSS_BAR_INCREMENT = 2;
+	public static final int BOSS_BAR_MAX = 200;
+	public static final int BAR_OUTSIDE_X = 495;
+	public static final int BAR_INSIDE_X = 500;
+	public static final int BAR_OUTSIDE_Y = 40;
+	public static final int BAR_INSIDE_Y = 45;
+	public static final int BAR_WIDTH = 200;
+	public static final int BAR_HEIGHT = 20;
+	public static final int BAR_DISPLACE = 10;
 
 	private Constants() 
 	{/* Utility Class */}

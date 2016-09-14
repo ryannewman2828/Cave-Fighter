@@ -1,21 +1,24 @@
 package cave.fighter.boss;
 
+import cave.fighter.utilities.Constants;
+
 public class BossHealthBar {
 
 	private int health;
-	private int size = 0;
+	private int size;
 
 	public BossHealthBar(int health) {
 		this.health = health;
+		size = 0;
 	}
 
 	public void update(int curHealth) {
-		size = (int) (((double) curHealth / health) * 200);
+		size = (int) (((double) curHealth / health) * Constants.BOSS_BAR_MAX);
 	}
 
 	public void incrementBar() {
-		if (size < 200) {
-			size += 2;
+		if (size < Constants.BOSS_BAR_MAX) {
+			size += Constants.BOSS_BAR_INCREMENT;
 		}
 	}
 
