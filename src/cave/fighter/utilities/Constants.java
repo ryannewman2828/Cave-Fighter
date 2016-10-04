@@ -83,9 +83,43 @@ public final class Constants {
 	public static final int ENEMY_SPAWN_TIME = 120;
 	public static final int TENTACLE_SPAWN_TIME = 80;
 	
+	public static final int GREEN_SLIME_X_DISPLACE = -14;
+	public static final int GREEN_SLIME_Y_DISPLACE = -10;
+	public static final int GREEN_SLIME_WIDTH = 27;
+	public static final int GREEN_SLIME_HEIGHT = 21;
+	public static final int GREEN_SLIME_MOVE_MULTI_1 = 4;
+	public static final int GREEN_SLIME_MOVE_MULTI_2 = 6;
+	public static final int GREEN_SLIME_COOLDOWN_MULT = 30;
+	
+	public static final int BLUE_SLIME_X_DISPLACE = -16;
+	public static final int BLUE_SLIME_Y_DISPLACE = -12;
+	public static final int BLUE_SLIME_WIDTH = 32;
+	public static final int BLUE_SLIME_HEIGHT = 24;
+
+	public static final int YELLOW_SLIME_X_DISPLACE = -17;
+	public static final int YELLOW_SLIME_Y_DISPLACE = -10;
+	public static final int YELLOW_SLIME_WIDTH = 33;
+	public static final int YELLOW_SLIME_HEIGHT = 21;
+	public static final int YELLOW_SLIME_EXTRA_SPEED = 3;
+	public static final int YELLOW_SLIME_CHARGE_OFFSET = 5;
+	public static final int YELLOW_SLIME_CHARGE_STOP_LEFT = 100;
+	public static final int YELLOW_SLIME_CHARGE_STOP_RIGHT = 700;
+	
+	public static final int RED_SLIME_X_DISPLACE = -14;
+	public static final int RED_SLIME_Y_DISPLACE = -10;
+	public static final int RED_SLIME_WIDTH = 27;
+	public static final int RED_SLIME_HEIGHT = 21;
+	public static final int RED_SLIME_MOVE_MULTI_1 = 4;
+	public static final int RED_SLIME_MOVE_MULTI_2 = 6;
+	public static final int RED_SLIME_COOLDOWN_MULT = 30;
+	
 	public static final int TENTACLE_SPEED = 0;
 	public static final int TENTACLE_HEALTH = 7;
 	public static final int TENTACLE_DAMAGE = 2;
+	public static final int TENTACLE_X_DISPLACE = -12;
+	public static final int TENTACLE_Y_DISPLACE = -45;
+	public static final int TENTACLE_WIDTH = 25;
+	public static final int TENTACLE_HEIGHT = 90;
 	
 	public static final int BOSS_X = 420;
 	public static final int BOSS_Y = 240;

@@ -7,7 +7,7 @@ public class BlueSlime extends Enemy {
 
 	public BlueSlime(int x, int y, int speed, int health, int damage) {
 		super(x, y, speed, health, damage);
-		
+
 		setEnemyAnimation(Assets.blueSlimeAnim.clone());
 		setImage(Assets.blueSlime);
 	}
@@ -18,7 +18,7 @@ public class BlueSlime extends Enemy {
 
 			fade();
 
-			//The after spawn
+			// The after spawn
 			if (getCounter() >= Constants.ENEMY_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.blueSlimeAnim.clone());
@@ -28,8 +28,10 @@ public class BlueSlime extends Enemy {
 			if (getHealth() <= 0) {
 				setAlive(false);
 			}
-			
-			enemyHitBox.setRect(getX() - 16, getY() - 12, 32, 24);
+
+			enemyHitBox.setRect(getX() + Constants.BLUE_SLIME_X_DISPLACE,
+					getY() + Constants.BLUE_SLIME_Y_DISPLACE,
+					Constants.BLUE_SLIME_WIDTH, Constants.BLUE_SLIME_HEIGHT);
 		}
 	}
 }

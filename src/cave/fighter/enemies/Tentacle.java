@@ -4,7 +4,7 @@ import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
 
 public class Tentacle extends Enemy {
-	
+
 	public Tentacle(int x, int y, int speed, int health, int damage) {
 		super(x, y, speed, health, damage);
 
@@ -17,7 +17,7 @@ public class Tentacle extends Enemy {
 		if (isSpawning()) {
 
 			setCounter(getCounter() + 1);
-			
+
 			if (getCounter() >= Constants.TENTACLE_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.tentacle.clone());
@@ -28,7 +28,9 @@ public class Tentacle extends Enemy {
 				setAlive(false);
 			}
 
-			enemyHitBox.setRect(getX() - 12, getY() - 45, 25, 90);
+			enemyHitBox.setRect(getX() + Constants.TENTACLE_X_DISPLACE, getY()
+					+ Constants.TENTACLE_Y_DISPLACE, Constants.TENTACLE_WIDTH,
+					Constants.TENTACLE_HEIGHT);
 		}
 	}
 }

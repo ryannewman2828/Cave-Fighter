@@ -6,8 +6,10 @@ import cave.fighter.utilities.Constants;
 
 public class GreenSlime extends Enemy {
 
-	private int a = (int) (Math.random() * 4) * 30 + 30;
-	private int b = (int) (Math.random() * 4) * 30 + 30;
+	private int a = (int) ((Math.random() * Constants.GREEN_SLIME_MOVE_MULTI_1) + 1)
+			* Constants.GREEN_SLIME_COOLDOWN_MULT;
+	private int b = (int) ((Math.random() * Constants.GREEN_SLIME_MOVE_MULTI_1) + 1)
+			* Constants.GREEN_SLIME_COOLDOWN_MULT;
 	private boolean c = true;
 	private boolean d = false;
 
@@ -22,10 +24,10 @@ public class GreenSlime extends Enemy {
 	public void update() {
 		if (isSpawning()) {
 
-			//Spawning
+			// Spawning
 			fade();
 
-			//The after spawn
+			// The after spawn
 			if (getCounter() >= Constants.ENEMY_SPAWN_TIME) {
 				setSpawning(false);
 				setEnemyAnimation(Assets.greenSlimeAnim.clone());
@@ -52,7 +54,8 @@ public class GreenSlime extends Enemy {
 				if (a == 0) {
 					d = true;
 					c = false;
-					b = (int) (Math.random() * 4) * 30 + 30;
+					b = (int) ((Math.random() * Constants.GREEN_SLIME_MOVE_MULTI_1) + 1)
+							* Constants.GREEN_SLIME_COOLDOWN_MULT;
 				}
 			}
 			if (b > 0 && !c) {
@@ -60,11 +63,14 @@ public class GreenSlime extends Enemy {
 				if (b == 0) {
 					c = true;
 					d = false;
-					a = (int) (Math.random() * 6) * 30 + 30;
+					a = (int) ((Math.random() * Constants.GREEN_SLIME_MOVE_MULTI_2) + 1)
+							* Constants.GREEN_SLIME_COOLDOWN_MULT;
 				}
 			}
 
-			enemyHitBox.setRect(getX() - 14, getY() - 10, 27, 21);
+			enemyHitBox.setRect(getX() + Constants.GREEN_SLIME_X_DISPLACE,
+					getY() - Constants.GREEN_SLIME_Y_DISPLACE,
+					Constants.GREEN_SLIME_WIDTH, Constants.GREEN_SLIME_HEIGHT);
 		}
 	}
 }
