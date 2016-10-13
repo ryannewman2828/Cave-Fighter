@@ -187,6 +187,10 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 		}
 		
+		if(!MainCharacter.getCharacterInstance().getAlive()){
+			gameState = GameStates.DEAD;
+		}
+		
 		animate();
 		repaint();
 	}

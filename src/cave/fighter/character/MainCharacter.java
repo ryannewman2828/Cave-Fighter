@@ -108,29 +108,37 @@ public class MainCharacter {
 		if (damageCounter > 0) {
 			damageCounter--;
 		}
+		
+		if (health <= 0){
+			alive = false;
+		}
 
 		switch (attack) {
 		case DOWN:
 			animationIndexHead = 0;
-			if (fireReady)
+			if (fireReady){
 				shoot(0, bulletSpeed);
+			}
 			break;
 		case LEFT:
 			animationIndexHead = 1;
-			if (fireReady)
+			if (fireReady){
 				shoot(-bulletSpeed, 0);
+			}
 			break;
 		case RIGHT:
 			animationIndexHead = 2;
-			if (fireReady)
+			if (fireReady){
 				shoot(bulletSpeed, 0);
+			}
 			break;
 		case STATIC:
 			break;
 		case UP:
 			animationIndexHead = 3;
-			if (fireReady)
+			if (fireReady){
 				shoot(0, -bulletSpeed);
+			}
 			break;
 		default:
 			break;
@@ -272,6 +280,10 @@ public class MainCharacter {
 
 	public void setHeadCounter(int headCounter) {
 		this.headCounter = headCounter;
+	}
+	
+	public boolean getAlive(){
+		return alive;
 	}
 
 	public BufferedImage getHeadImage() {
