@@ -69,7 +69,7 @@ public class GreenSlime extends Enemy {
 			}
 
 			enemyHitBox.setRect(getX() + Constants.GREEN_SLIME_X_DISPLACE,
-					getY() - Constants.GREEN_SLIME_Y_DISPLACE,
+					getY() + Constants.GREEN_SLIME_Y_DISPLACE,
 					Constants.GREEN_SLIME_WIDTH, Constants.GREEN_SLIME_HEIGHT);
 		}
 	}

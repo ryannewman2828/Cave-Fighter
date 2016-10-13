@@ -9,8 +9,8 @@ import cave.fighter.utilities.Constants;
 public class PanelManager {
 
 	private CaveFighterPanel curPanel;
-	private final CaveFighterPanel menuPanel;
-	private final CaveFighterPanel gamePanel;
+	private CaveFighterPanel menuPanel;
+	private CaveFighterPanel gamePanel;
 	private final JFrame jFrame;
 	
 	public PanelManager(JFrame jFrame) throws IOException {
@@ -28,20 +28,26 @@ public class PanelManager {
 		jFrame.setContentPane(curPanel);
 	}	
 	
-	public void switchPanel(){
+	public void switchPanel() throws IOException{
 		if(curPanel == menuPanel){
 			gamePanel.setSize(curPanel.getMapSize());
 			gamePanel.setDifficulty(curPanel.getDifficulty());
 			curPanel = gamePanel;
 			((GamePanel) gamePanel).setUpMap();
+			menuPanel = new MenuPanel();
+			menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
+			menuPanel.setVisible(true);
 		} else {
 			curPanel = menuPanel;
+			gamePanel = new GamePanel();
+			gamePanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
+			gamePanel.setVisible(true);
 		}
 		jFrame.setContentPane(curPanel);
 		curPanel.requestFocus();
 	}
 	
-	public void run() throws InterruptedException{
+	public void run() throws InterruptedException, IOException{
 	
 		while (true) {
 

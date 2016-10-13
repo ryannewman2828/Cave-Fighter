@@ -195,7 +195,7 @@ public final class Constants {
 	public static final int SHADE_HEIGHT_4 = 15;
 	
 	public static final int BOSS_DELAY_INCREMENT = 20;
-	public static final int SECONDARY_DELAY_INCREMENT = 20;
+	public static final int SECONDARY_DELAY_INCREMENT = 40;
 	public static final int DELAY_INCREMENT = 30;
 	public static final int DELAY_MULTIPLIER = 10;
 	public static final int SPEED_DEFLATER = 5;

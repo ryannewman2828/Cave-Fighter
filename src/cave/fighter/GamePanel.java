@@ -28,16 +28,20 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 	private boolean downPressed;
 	private boolean leftPressed;
 	private boolean rightPressed;
+	private boolean keyPressed;
 
 	private int counter;
+	private int keyCounter;
 
 	private Map map;
 
-	public static GameStates gameState = GameStates.RUNNING;
+	public static GameStates gameState;
 
 	public GamePanel() throws IOException {
 		
 		counter = 0;
+		keyCounter = 0;
+		
 		wPressed = false;
 		sPressed = false;
 		aPressed = false;
@@ -46,9 +50,11 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		downPressed = false;
 		leftPressed = false;
 		rightPressed = false;
+		keyPressed = false;
+		
+		gameState = GameStates.RUNNING;
 		
 		setSwitchPanel(false);
-
 		addKeyListener(this);
 	}
 
@@ -180,7 +186,11 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 		case DEAD:
 		case GAME_OVER:
-
+			if (keyPressed){
+				// TODO: handle the no key cooldown between end of game and end screen
+				MainCharacter.getCharacterInstance().resetCharacter();
+				setSwitchPanel(true);
+			}
 			break;
 		default:
 			break;
@@ -321,6 +331,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		keyPressed = true;
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			upPressed = true;
@@ -353,6 +364,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		keyPressed = false;
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			upPressed = false;
