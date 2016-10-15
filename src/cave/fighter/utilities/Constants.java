@@ -38,13 +38,13 @@ public final class Constants {
 	public static final int CHAR_MAX_HEALTH = 10;
 	public static final int CHAR_START_HEALTH = 6;
 	public static final int CHAR_MAX_SPEED = 6;
-	public static final int CHAR_START_SPEED = 6; //3;
+	public static final int CHAR_START_SPEED = 3;
 	public static final int CHAR_START_BULLET_SPEED = 4;
 	public static final int CHAR_MAX_FIRE_RATE = 10;
 	public static final int CHAR_START_FIRE_RATE = 25;
 	public static final int CHAR_DECREASE_FIRE_RATE = 5;
 	public static final int CHAR_MAX_DAMAGE = 5;
-	public static final int CHAR_START_DAMAGE = 5; //1;
+	public static final int CHAR_START_DAMAGE = 1;
 	public static final int CHAR_START_X = 400;
 	public static final int CHAR_START_Y = 240;
 	public static final int CHAR_HITBOX_1_X_DISPLACE = 15;
