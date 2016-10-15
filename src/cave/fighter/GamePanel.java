@@ -40,7 +40,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 	public GamePanel() throws IOException {
 		
 		counter = 0;
-		keyCounter = 0;
+		keyCounter = 30;
 		
 		wPressed = false;
 		sPressed = false;
@@ -186,10 +186,12 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 		case DEAD:
 		case GAME_OVER:
-			if (keyPressed){
-				// TODO: handle the no key cooldown between end of game and end screen
+			if (keyPressed && keyCounter == 0){
 				MainCharacter.getCharacterInstance().resetCharacter();
 				setSwitchPanel(true);
+			}
+			if (keyCounter > 0){
+				keyCounter--;
 			}
 			break;
 		default:
