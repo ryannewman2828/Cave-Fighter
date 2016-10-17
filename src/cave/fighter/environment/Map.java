@@ -101,53 +101,6 @@ public class Map {
 
 		activeRoom.update();
 
-		switch (move) {
-		case DOWN:
-			character.setAnimationIndexBody(0);
-			character.setAnimationIndexHead(0);
-			if (!character.getRect().intersects(boundBot1)
-					&& !character.getRect().intersects(boundBot2)
-					&& !character.getRect()
-							.intersects(activeRoom.getBlockBot())) {
-				character.move(0, character.getSpeed());
-			}
-			break;
-		case LEFT:
-			character.setAnimationIndexBody(1);
-			character.setAnimationIndexHead(1);
-			if (!character.getRect().intersects(boundLeft1)
-					&& !character.getRect().intersects(boundLeft2)
-					&& !character.getRect().intersects(
-							activeRoom.getBlockLeft())) {
-				character.move(-character.getSpeed(), 0);
-			}
-			break;
-		case RIGHT:
-			character.setAnimationIndexBody(2);
-			character.setAnimationIndexHead(2);
-			if (!character.getRect().intersects(boundRight1)
-					&& !character.getRect().intersects(boundRight2)
-					&& !character.getRect().intersects(
-							activeRoom.getBlockRight())) {
-				character.move(character.getSpeed(), 0);
-			}
-			break;
-		case STATIC:
-			break;
-		case UP:
-			character.setAnimationIndexBody(3);
-			character.setAnimationIndexHead(3);
-			if (!character.getRect().intersects(boundTop1)
-					&& !character.getRect().intersects(boundTop2)
-					&& !character.getRect()
-							.intersects(activeRoom.getBlockTop())) {
-				character.move(0, -character.getSpeed());
-			}
-			break;
-		default:
-			break;
-		}
-
 		// Handles the movement throughout the map
 		if (character.getRect().intersects(activeRoom.getSpawnBot())) {
 			moveBelowRoom();
@@ -173,7 +126,46 @@ public class Map {
 
 		character.update();
 	}
-
+	public void moveUp(){
+		character.setAnimationIndexBody(3);
+		character.setAnimationIndexHead(3);
+		if (!character.getRect().intersects(boundTop1)
+				&& !character.getRect().intersects(boundTop2)
+				&& !character.getRect()
+						.intersects(activeRoom.getBlockTop())) {
+			character.move(0, -character.getSpeed());
+		}
+	}
+	public void moveLeft(){
+		character.setAnimationIndexBody(1);
+		character.setAnimationIndexHead(1);
+		if (!character.getRect().intersects(boundLeft1)
+				&& !character.getRect().intersects(boundLeft2)
+				&& !character.getRect().intersects(
+						activeRoom.getBlockLeft())) {
+			character.move(-character.getSpeed(), 0);
+		}
+	}
+	public void moveDown(){
+		character.setAnimationIndexBody(0);
+		character.setAnimationIndexHead(0);
+		if (!character.getRect().intersects(boundBot1)
+				&& !character.getRect().intersects(boundBot2)
+				&& !character.getRect()
+						.intersects(activeRoom.getBlockBot())) {
+			character.move(0, character.getSpeed());
+		}
+	}
+	public void moveRight(){
+		character.setAnimationIndexBody(2);
+		character.setAnimationIndexHead(2);
+		if (!character.getRect().intersects(boundRight1)
+				&& !character.getRect().intersects(boundRight2)
+				&& !character.getRect().intersects(
+						activeRoom.getBlockRight())) {
+			character.move(character.getSpeed(), 0);
+		}
+	}
 	// Connects the rooms
 	private void connectRooms() {
 		for (int i = 0; i < GRID_SIZE; i++) {
