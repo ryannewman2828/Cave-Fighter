@@ -18,7 +18,7 @@ import cave.fighter.environment.Map;
 import cave.fighter.utilities.Assets;
 import cave.fighter.utilities.Constants;
 
-public class GamePanel extends CaveFighterPanel implements KeyListener {
+public class GamePanel extends CaveFighterPanel {
 
 	private boolean wPressed;
 	private boolean sPressed;
@@ -34,7 +34,7 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 	private int keyCounter;
 
 	private Map map;
-
+	private BitKeys keys;
 	public static GameStates gameState;
 
 	public GamePanel() throws IOException {
@@ -53,9 +53,9 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 		keyPressed = false;
 		
 		gameState = GameStates.RUNNING;
-		
+		keys= new BitKeys();
 		setSwitchPanel(false);
-		addKeyListener(this);
+		addKeyListener(keys);
 	}
 
 	public void setUpMap() {
@@ -152,33 +152,38 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 		case RUNNING:
 		case BOSS_BATTLE:
-			if (wPressed) {
+			if (keys.isKeyPressed(KeyEvent.VK_W)) {
 				map.move = MoveStates.UP;
-			} else if (sPressed) {
+				map.moveUp();
+			} if (keys.isKeyPressed(KeyEvent.VK_S)) {
 				map.move = MoveStates.DOWN;
-			} else if (aPressed) {
+				map.moveDown();
+			} if (keys.isKeyPressed(KeyEvent.VK_A)) {
 				map.move = MoveStates.LEFT;
-			} else if (dPressed) {
+				map.moveLeft();
+			} if (keys.isKeyPressed(KeyEvent.VK_D)) {
 				map.move = MoveStates.RIGHT;
-			} else {
+				map.moveRight();
+			} if(keys.isEmpty()) {
 				map.move = MoveStates.STATIC;
+				
 			}
-
 			map.update();
+			
 
-			if (upPressed
+			if (keys.isKeyPressed(KeyEvent.VK_UP)
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.UP;
 				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
-			} else if (leftPressed
+			} else if (keys.isKeyPressed(KeyEvent.VK_LEFT)
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.LEFT;
 				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
-			} else if (rightPressed
+			} else if (keys.isKeyPressed(KeyEvent.VK_RIGHT)
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.RIGHT;
 				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
-			} else if (downPressed
+			} else if (keys.isKeyPressed(KeyEvent.VK_DOWN)
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
 				MainCharacter.getCharacterInstance().attack = AttackStates.DOWN;
 				MainCharacter.getCharacterInstance().setHeadCounter(Constants.CHAR_HEAD_COOLDOWN);
@@ -186,12 +191,9 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 			break;
 		case DEAD:
 		case GAME_OVER:
-			if (keyPressed && keyCounter == 0){
+			if (keys.isEmpty()){
 				MainCharacter.getCharacterInstance().resetCharacter();
 				setSwitchPanel(true);
-			}
-			if (keyCounter > 0){
-				keyCounter--;
 			}
 			break;
 		default:
@@ -329,74 +331,5 @@ public class GamePanel extends CaveFighterPanel implements KeyListener {
 				g.drawImage(Assets.emptyHeart, Constants.HEART_X_LOCATION_MULTIPLIER * i + Constants.HEART_DISPLACE, Constants.HEART_Y, this);
 			}
 		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		keyPressed = true;
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			upPressed = true;
-			break;
-		case KeyEvent.VK_DOWN:
-			downPressed = true;
-			break;
-		case KeyEvent.VK_LEFT:
-			leftPressed = true;
-			break;
-		case KeyEvent.VK_RIGHT:
-			rightPressed = true;
-			break;
-
-		case KeyEvent.VK_W:
-			wPressed = true;
-			break;
-		case KeyEvent.VK_A:
-			aPressed = true;
-			break;
-		case KeyEvent.VK_S:
-			sPressed = true;
-			break;
-		case KeyEvent.VK_D:
-			dPressed = true;
-			break;
-		}
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		keyPressed = false;
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			upPressed = false;
-			break;
-		case KeyEvent.VK_DOWN:
-			downPressed = false;
-			break;
-		case KeyEvent.VK_LEFT:
-			leftPressed = false;
-			break;
-		case KeyEvent.VK_RIGHT:
-			rightPressed = false;
-			break;
-
-		case KeyEvent.VK_W:
-			wPressed = false;
-			break;
-		case KeyEvent.VK_A:
-			aPressed = false;
-			break;
-		case KeyEvent.VK_S:
-			sPressed = false;
-			break;
-		case KeyEvent.VK_D:
-			dPressed = false;
-			break;
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
 	}
 }
