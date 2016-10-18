@@ -143,12 +143,10 @@ public class GamePanel extends CaveFighterPanel {
 			} if (keys.isKeyPressed(KeyEvent.VK_D)) {
 				map.move = MoveStates.RIGHT;
 				map.moveRight();
-			} if(keys.isEmpty()) {
+			} if(!keys.areMoveKeysPressed()) {
 				map.move = MoveStates.STATIC;
-				
 			}
 			map.update();
-			
 
 			if (keys.isKeyPressed(KeyEvent.VK_UP)
 					&& MainCharacter.getCharacterInstance().getHeadCounter() == 0) {
