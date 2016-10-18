@@ -56,10 +56,6 @@ public abstract class Enemy {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-
 	public boolean isAlive() {
 		return alive;
 	}
@@ -87,11 +83,7 @@ public abstract class Enemy {
 	public int getHealth() {
 		return health;
 	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
+	
 	public void damageEnemy(int dmg){
 		health -= dmg;
 	}
@@ -100,20 +92,12 @@ public abstract class Enemy {
 		return damage;
 	}
 
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-
 	public Animation getEnemyAnimation() {
 		return enemyAnimation;
 	}
 
 	public void setEnemyAnimation(Animation enemyAnimation) {
 		this.enemyAnimation = enemyAnimation;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 
 	public void setImage(Image image) {
@@ -126,14 +110,6 @@ public abstract class Enemy {
 
 	public void setSpawning(boolean spawning) {
 		this.spawning = spawning;
-	}
-
-	public float getAlpha() {
-		return alpha;
-	}
-
-	public void setAlpha(float alpha) {
-		this.alpha = alpha;
 	}
 
 	public int getCounter() {

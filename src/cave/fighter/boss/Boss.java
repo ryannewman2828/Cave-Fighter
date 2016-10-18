@@ -82,10 +82,6 @@ public abstract class Boss {
 		return health;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
 	public void damageBoss(int dmg) {
 		if (health - dmg >= 0) {
 			health -= dmg;
@@ -97,10 +93,6 @@ public abstract class Boss {
 
 	public int getDamage() {
 		return damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
 	}
 
 	public Animation getBossAnimation() {
@@ -122,10 +114,6 @@ public abstract class Boss {
 
 	public BossHealthBar getHpBar() {
 		return hpBar;
-	}
-
-	public void setHpBar(BossHealthBar hpBar) {
-		this.hpBar = hpBar;
 	}
 
 	public boolean isSpawnEnemy() {
@@ -150,13 +138,5 @@ public abstract class Boss {
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-	}
-
-	public Image getCanvasImage() {
-		return canvasImage;
-	}
-
-	public void setCanvasImage(Image canvasImage) {
-		this.canvasImage = canvasImage;
 	}
 }

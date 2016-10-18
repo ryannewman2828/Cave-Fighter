@@ -236,7 +236,7 @@ public class Room {
 		hasLeft = true;
 	}
 
-	Room getAboveRoom() {
+	public Room getAboveRoom() {
 		return aboveRoom;
 	}
 

@@ -300,7 +300,7 @@ public class Map {
 	}
 
 	// Prints map to console
-	public void print() {
+	private void print() {
 		for (int i = 0; i < layout.length; i++) {
 			for (int j = 0; j < layout.length; j++) {
 				if (layout[i][j]) {

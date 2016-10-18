@@ -15,14 +15,9 @@ public class PanelManager {
 	
 	public PanelManager(JFrame jFrame) throws IOException {
 		this.jFrame = jFrame;
-		
-		menuPanel = new MenuPanel();
-		menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
-		menuPanel.setVisible(true);
 
-		gamePanel = new GamePanel();
-		gamePanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
-		gamePanel.setVisible(true);
+		startMenu();
+		startGame();
 		
 		curPanel = menuPanel;
 		jFrame.setContentPane(curPanel);
@@ -34,14 +29,10 @@ public class PanelManager {
 			gamePanel.setDifficulty(curPanel.getDifficulty());
 			curPanel = gamePanel;
 			((GamePanel) gamePanel).setUpMap();
-			menuPanel = new MenuPanel();
-			menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
-			menuPanel.setVisible(true);
+			startMenu();
 		} else {
 			curPanel = menuPanel;
-			gamePanel = new GamePanel();
-			gamePanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
-			gamePanel.setVisible(true);
+			startGame();
 		}
 		jFrame.setContentPane(curPanel);
 		curPanel.requestFocus();
@@ -60,6 +51,18 @@ public class PanelManager {
 			// (runs program at 60 frames per second)
 			Thread.sleep(17);
 		}
+	}
+	
+	private void startMenu() throws IOException{
+		menuPanel = new MenuPanel();
+		menuPanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
+		menuPanel.setVisible(true);
+	}
+	
+	private void startGame() throws IOException{
+		gamePanel = new GamePanel();
+		gamePanel.setSize(Constants.PANEL_WIDTH, Constants.PANEL_HEIGHT);
+		gamePanel.setVisible(true);
 	}
 
 }

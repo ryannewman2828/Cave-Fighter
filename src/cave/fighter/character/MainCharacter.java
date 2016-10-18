@@ -170,24 +170,12 @@ public class MainCharacter {
 		return health;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
 	public int getCurHealth() {
 		return curHealth;
 	}
 
-	public void setCurHealth(int curHealth) {
-		this.curHealth = curHealth;
-	}
-
 	public int getSpeed() {
 		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
 	}
 
 	public int getX() {
@@ -213,10 +201,6 @@ public class MainCharacter {
 
 	public int getDamage() {
 		return damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
 	}
 
 	public ArrayList<Projectile> getProjectiles() {
@@ -266,14 +250,6 @@ public class MainCharacter {
 		}
 	}
 
-	public int getFireRate() {
-		return fireRate;
-	}
-
-	public void setFireRate(int fireRate) {
-		this.fireRate = fireRate;
-	}
-
 	public int getHeadCounter() {
 		return headCounter;
 	}
@@ -314,16 +290,8 @@ public class MainCharacter {
 		return Assets.bodyAnimation[animationIndexBody];
 	}
 
-	public int getAnimationIndexHead() {
-		return animationIndexHead;
-	}
-
 	public void setAnimationIndexHead(int animationIndexHead) {
 		this.animationIndexHead = animationIndexHead;
-	}
-
-	public int getAnimationIndexBody() {
-		return animationIndexBody;
 	}
 
 	public void setAnimationIndexBody(int animationIndexBody) {
