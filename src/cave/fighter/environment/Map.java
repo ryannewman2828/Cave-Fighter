@@ -126,6 +126,7 @@ public class Map {
 
 		character.update();
 	}
+	
 	public void moveUp(){
 		character.setAnimationIndexBody(3);
 		character.setAnimationIndexHead(3);
@@ -136,6 +137,7 @@ public class Map {
 			character.move(0, -character.getSpeed());
 		}
 	}
+	
 	public void moveLeft(){
 		character.setAnimationIndexBody(1);
 		character.setAnimationIndexHead(1);
@@ -146,6 +148,7 @@ public class Map {
 			character.move(-character.getSpeed(), 0);
 		}
 	}
+	
 	public void moveDown(){
 		character.setAnimationIndexBody(0);
 		character.setAnimationIndexHead(0);
@@ -156,6 +159,7 @@ public class Map {
 			character.move(0, character.getSpeed());
 		}
 	}
+	
 	public void moveRight(){
 		character.setAnimationIndexBody(2);
 		character.setAnimationIndexHead(2);
@@ -166,6 +170,7 @@ public class Map {
 			character.move(character.getSpeed(), 0);
 		}
 	}
+	
 	// Connects the rooms
 	private void connectRooms() {
 		for (int i = 0; i < GRID_SIZE; i++) {

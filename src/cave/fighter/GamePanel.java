@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,16 +19,6 @@ import cave.fighter.utilities.Constants;
 
 public class GamePanel extends CaveFighterPanel {
 
-	private boolean wPressed;
-	private boolean sPressed;
-	private boolean aPressed;
-	private boolean dPressed;
-	private boolean upPressed;
-	private boolean downPressed;
-	private boolean leftPressed;
-	private boolean rightPressed;
-	private boolean keyPressed;
-
 	private int counter;
 	private int keyCounter;
 
@@ -40,17 +29,7 @@ public class GamePanel extends CaveFighterPanel {
 	public GamePanel() throws IOException {
 		
 		counter = 0;
-		keyCounter = 30;
-		
-		wPressed = false;
-		sPressed = false;
-		aPressed = false;
-		dPressed = false;
-		upPressed = false;
-		downPressed = false;
-		leftPressed = false;
-		rightPressed = false;
-		keyPressed = false;
+		keyCounter = 45;
 		
 		gameState = GameStates.RUNNING;
 		keys= new BitKeys();
@@ -191,7 +170,9 @@ public class GamePanel extends CaveFighterPanel {
 			break;
 		case DEAD:
 		case GAME_OVER:
-			if (keys.isEmpty()){
+			if (keyCounter > 0){
+				keyCounter--;
+			} else if (!keys.isEmpty()){
 				MainCharacter.getCharacterInstance().resetCharacter();
 				setSwitchPanel(true);
 			}
@@ -304,7 +285,7 @@ public class GamePanel extends CaveFighterPanel {
 		}
 	}
 
-	public void drawRoom(Graphics g) {
+	private void drawRoom(Graphics g) {
 
 		g.drawImage(Assets.roomImage, 0, 0, this);
 
